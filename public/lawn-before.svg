@@ -1,0 +1,16 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#DDE9DE"/>
+      <stop offset="1" stop-color="#C7D8C8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect x="120" y="120" width="960" height="560" rx="24" fill="#EEF4EE" stroke="#9CB79F" stroke-width="8"/>
+  <path d="M170 560C260 500 340 605 430 540C520 475 620 615 710 545C800 475 900 590 1010 520" stroke="#8EA98F" stroke-width="22" stroke-linecap="round"/>
+  <path d="M170 470C260 410 340 515 430 450C520 385 620 525 710 455C800 385 900 500 1010 430" stroke="#95AF97" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="320" cy="270" r="40" fill="#B6C7B8"/>
+  <circle cx="540" cy="250" r="28" fill="#B2C5B4"/>
+  <circle cx="760" cy="290" r="36" fill="#AFC2B1"/>
+  <text x="600" y="715" text-anchor="middle" fill="#4F6453" font-family="Arial, sans-serif" font-size="48" font-weight="700">Before</text>
+</svg>
