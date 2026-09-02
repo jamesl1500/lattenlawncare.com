@@ -8,9 +8,9 @@ describe("SiteFooter", () => {
     render(<SiteFooter />);
 
     expect(screen.getByText("Latten Lawncare")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /\(440\) 921-8245/ })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /\(216\) 889-7822/ })).toHaveAttribute(
       "href",
-      "tel:+14409218245",
+      "tel:+12168897822",
     );
     expect(screen.getByRole("link", { name: /hello@lattenlawncare\.com/ })).toHaveAttribute(
       "href",
