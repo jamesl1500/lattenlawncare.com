@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import MobileCallBar from "@/components/MobileCallBar";
+import { IconMapPin } from "@/components/icons";
 import { locations } from "@/lib/locations";
 
 export const metadata: Metadata = {
@@ -17,7 +19,7 @@ export default function LocationsPage() {
   return (
     <div className="site-shell">
       <SiteHeader />
-      <main>
+      <main id="main-content">
         <section className="section reveal">
           <p className="eyebrow">Service Areas</p>
           <h1>Lorain County Locations We Serve</h1>
@@ -30,7 +32,10 @@ export default function LocationsPage() {
         <section className="section reveal reveal--delay-1">
           <div className="location-grid">
             {locations.map((location) => (
-              <article className="card" key={location.slug}>
+              <article className="card card--interactive" key={location.slug}>
+                <span className="card__icon">
+                  <IconMapPin />
+                </span>
                 <h2>{location.city}</h2>
                 <p>{location.summary}</p>
                 <p>
@@ -45,6 +50,7 @@ export default function LocationsPage() {
         </section>
       </main>
       <SiteFooter />
+      <MobileCallBar />
     </div>
   );
 }
