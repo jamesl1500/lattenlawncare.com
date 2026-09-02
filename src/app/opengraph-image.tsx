@@ -19,8 +19,8 @@ export default function OpenGraphImage() {
           justifyContent: "space-between",
           padding: "56px",
           background:
-            "radial-gradient(120% 90% at 5% 0%, rgba(118, 199, 142, 0.9), rgba(118, 199, 142, 0) 58%), radial-gradient(100% 85% at 90% 100%, rgba(67, 150, 94, 0.42), rgba(67, 150, 94, 0) 62%), linear-gradient(160deg, #f3fbf4 0%, #dfeee2 100%)",
-          color: "#163f25",
+            "radial-gradient(120% 90% at 5% 0%, rgba(28, 122, 74, 0.85), rgba(28, 122, 74, 0) 58%), radial-gradient(100% 85% at 90% 100%, rgba(245, 166, 35, 0.35), rgba(245, 166, 35, 0) 62%), linear-gradient(160deg, #0d3a23 0%, #124f30 100%)",
+          color: "#f2fbf3",
           fontFamily: "Arial, sans-serif",
         }}
       >
@@ -30,6 +30,7 @@ export default function OpenGraphImage() {
             fontWeight: 700,
             textTransform: "uppercase",
             letterSpacing: "0.08em",
+            color: "#f5a623",
           }}
         >
           Lorain County Lawn Care

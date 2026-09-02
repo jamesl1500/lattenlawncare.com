@@ -1,16 +1,43 @@
-<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Overgrown, patchy lawn before Latten Lawncare service">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#DDE9DE"/>
-      <stop offset="1" stop-color="#C7D8C8"/>
+    <linearGradient id="beforeSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3f1e6"/>
+      <stop offset="1" stop-color="#e7e3d2"/>
+    </linearGradient>
+    <linearGradient id="beforeGrass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a9ac6d"/>
+      <stop offset="1" stop-color="#8b8f57"/>
     </linearGradient>
   </defs>
-  <rect width="1200" height="800" fill="url(#bg)"/>
-  <rect x="120" y="120" width="960" height="560" rx="24" fill="#EEF4EE" stroke="#9CB79F" stroke-width="8"/>
-  <path d="M170 560C260 500 340 605 430 540C520 475 620 615 710 545C800 475 900 590 1010 520" stroke="#8EA98F" stroke-width="22" stroke-linecap="round"/>
-  <path d="M170 470C260 410 340 515 430 450C520 385 620 525 710 455C800 385 900 500 1010 430" stroke="#95AF97" stroke-width="18" stroke-linecap="round"/>
-  <circle cx="320" cy="270" r="40" fill="#B6C7B8"/>
-  <circle cx="540" cy="250" r="28" fill="#B2C5B4"/>
-  <circle cx="760" cy="290" r="36" fill="#AFC2B1"/>
-  <text x="600" y="715" text-anchor="middle" fill="#4F6453" font-family="Arial, sans-serif" font-size="48" font-weight="700">Before</text>
+  <rect width="1200" height="800" fill="url(#beforeSky)"/>
+  <rect x="0" y="420" width="1200" height="380" fill="url(#beforeGrass)"/>
+  <g opacity="0.5" stroke="#767a45" stroke-width="3" stroke-linecap="round">
+    <path d="M60 470 L40 560"/>
+    <path d="M95 465 L120 555"/>
+    <path d="M150 480 L130 570"/>
+    <path d="M210 470 L235 565"/>
+    <path d="M300 490 L280 580"/>
+    <path d="M370 475 L395 565"/>
+    <path d="M450 495 L430 585"/>
+    <path d="M540 480 L565 570"/>
+    <path d="M620 500 L600 590"/>
+    <path d="M710 485 L735 575"/>
+    <path d="M790 500 L770 590"/>
+    <path d="M880 480 L905 570"/>
+    <path d="M960 495 L940 585"/>
+    <path d="M1040 480 L1065 570"/>
+    <path d="M1120 495 L1100 585"/>
+  </g>
+  <g fill="#dfae4d" opacity="0.85">
+    <circle cx="230" cy="520" r="10"/>
+    <circle cx="255" cy="505" r="7"/>
+    <circle cx="700" cy="540" r="9"/>
+    <circle cx="905" cy="515" r="8"/>
+  </g>
+  <path d="M0 430c120-30 220 20 340-5s220-45 340-15 240 35 340 5 180-30 180-30v20c0 0-90 25-180 30s-240-35-340-5-220 45-340 15-220-25-340 5Z" fill="#c9b96a" opacity="0.55"/>
+  <rect x="0" y="0" width="1200" height="800" fill="none"/>
+  <g transform="translate(64 64)">
+    <rect width="150" height="44" rx="22" fill="#2c2416" opacity="0.78"/>
+    <text x="75" y="29" text-anchor="middle" fill="#fdf6e3" font-family="Arial, sans-serif" font-size="20" font-weight="700">BEFORE</text>
+  </g>
 </svg>
