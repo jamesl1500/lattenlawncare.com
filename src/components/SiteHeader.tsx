@@ -68,12 +68,12 @@ export default function SiteHeader() {
 
         <TrackedLink
           className="btn btn--primary btn--block"
-          href="tel:+14409218245"
+          href="tel:+12168897822"
           trackingEvent="conversion_call_click"
           trackingLabel="Mobile Nav Call"
         >
           <IconPhone />
-          Call (440) 921-8245
+          Call (216) 889-7822
         </TrackedLink>
       </div>
     </div>
@@ -101,12 +101,12 @@ export default function SiteHeader() {
           <div className="site-header__actions">
             <TrackedLink
               className="site-header__phone"
-              href="tel:+14409218245"
+              href="tel:+12168897822"
               trackingEvent="conversion_call_click"
               trackingLabel="Header Call"
             >
               <IconPhone />
-              (440) 921-8245
+              (216) 889-7822
             </TrackedLink>
             <TrackedLink
               className="btn btn--primary btn--sm"

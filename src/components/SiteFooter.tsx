@@ -58,8 +58,8 @@ export default function SiteFooter() {
           <h4>Contact</h4>
           <ul>
             <li className="footer__contact-item">
-              <a href="tel:+14409218245">
-                <IconPhone /> (440) 921-8245
+              <a href="tel:+12168897822">
+                <IconPhone /> (216) 889-7822
               </a>
             </li>
             <li className="footer__contact-item">

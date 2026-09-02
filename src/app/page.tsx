@@ -108,7 +108,7 @@ const faqItems = [
   {
     question: "How do I request service?",
     answer:
-      "You can call (440) 921-8245 or email hello@lattenlawncare.com for scheduling and quotes.",
+      "You can call (216) 889-7822 or email hello@lattenlawncare.com for scheduling and quotes.",
   },
 ];
 
@@ -120,7 +120,7 @@ export default function Home() {
         "@type": "LocalBusiness",
         name: "Latten Lawncare",
         areaServed: "Lorain County, Ohio",
-        telephone: "+1-440-921-8245",
+        telephone: "+1-216-889-7822",
         email: "hello@lattenlawncare.com",
         description:
           "Local lawn care company offering lawn cutting, edging, and weed control for small to medium sized lawns.",
@@ -190,12 +190,12 @@ export default function Home() {
                 <div className="hero__cta-group">
                   <TrackedLink
                     className="btn btn--primary"
-                    href="tel:+14409218245"
+                    href="tel:+12168897822"
                     trackingEvent="conversion_call_click"
                     trackingLabel="Hero Call"
                   >
                     <IconPhone />
-                    Call (440) 921-8245
+                    Call (216) 889-7822
                   </TrackedLink>
                   <TrackedLink
                     className="btn btn--ghost"
@@ -315,7 +315,7 @@ export default function Home() {
                 </ul>
                 <TrackedLink
                   className="btn btn--primary btn--block"
-                  href="tel:+14409218245"
+                  href="tel:+12168897822"
                   trackingEvent="conversion_call_click"
                   trackingLabel="Pricing Call"
                 >

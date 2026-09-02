@@ -6,7 +6,7 @@ export default function MobileCallBar() {
     <div className="mobile-cta-bar" role="complementary" aria-label="Quick contact">
       <TrackedLink
         className="btn btn--primary"
-        href="tel:+14409218245"
+        href="tel:+12168897822"
         trackingEvent="conversion_call_click"
         trackingLabel="Sticky Bar Call"
       >

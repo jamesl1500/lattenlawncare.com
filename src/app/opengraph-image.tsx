@@ -52,7 +52,7 @@ export default function OpenGraphImage() {
             fontWeight: 700,
           }}
         >
-          <span>(440) 921-8245</span>
+          <span>(216) 889-7822</span>
           <span>Starting at $40</span>
         </div>
       </div>

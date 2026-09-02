@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${location.city} Lawn Care | Latten Lawncare`,
-    description: `${location.summary} Call (440) 921-8245 to schedule your next lawn cut in ${location.city}.`,
+    description: `${location.summary} Call (216) 889-7822 to schedule your next lawn cut in ${location.city}.`,
     alternates: {
       canonical: `/locations/${location.slug}`,
     },
@@ -83,9 +83,9 @@ export default async function LocationDetailPage({ params }: Props) {
           <h1>{location.headline}</h1>
           <p className="hero__lead">{location.summary}</p>
           <div className="hero__cta-group">
-            <a className="btn btn--primary" href="tel:+14409218245">
+            <a className="btn btn--primary" href="tel:+12168897822">
               <IconPhone />
-              Call (440) 921-8245
+              Call (216) 889-7822
             </a>
             <a className="btn btn--ghost" href="mailto:hello@lattenlawncare.com">
               <IconMail />
@@ -135,9 +135,9 @@ export default async function LocationDetailPage({ params }: Props) {
               Let us know your lawn size and preferred day, and we will get you on the schedule quickly.
             </p>
             <div className="contact-box__links">
-              <a className="btn btn--accent" href="tel:+14409218245">
+              <a className="btn btn--accent" href="tel:+12168897822">
                 <IconPhone />
-                (440) 921-8245
+                (216) 889-7822
               </a>
               <a className="btn btn--outline" href="mailto:hello@lattenlawncare.com">
                 <IconMail />
