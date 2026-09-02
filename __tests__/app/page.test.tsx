@@ -8,7 +8,7 @@ describe("Home page", () => {
     render(<Home />);
 
     expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
-    expect(screen.getAllByRole("link", { name: /call \(440\) 921-8245/i }).length).toBeGreaterThan(
+    expect(screen.getAllByRole("link", { name: /call \(216\) 889-7822/i }).length).toBeGreaterThan(
       0,
     );
     expect(
