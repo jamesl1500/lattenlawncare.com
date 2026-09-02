@@ -449,12 +449,12 @@ export default function Home() {
               <div className="contact-box__links">
                 <TrackedLink
                   className="btn btn--accent"
-                  href="tel:+14409218245"
+                  href="tel:+12168897822"
                   trackingEvent="conversion_call_click"
                   trackingLabel="Footer Call"
                 >
                   <IconPhone />
-                  (440) 921-8245
+                  (216) 889-7822
                 </TrackedLink>
                 <TrackedLink
                   className="btn btn--outline"
