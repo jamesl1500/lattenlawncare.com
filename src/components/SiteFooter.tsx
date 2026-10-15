@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { IconLeaf, IconMail, IconMapPin, IconPhone } from "@/components/icons";
+import BrandLogo from "@/components/BrandLogo";
+import { IconMail, IconMapPin, IconPhone } from "@/components/icons";
 import { locations } from "@/lib/locations";
 
 export default function SiteFooter() {
@@ -11,10 +12,7 @@ export default function SiteFooter() {
       <div className="footer__inner">
         <div>
           <span className="footer__brand">
-            <span className="footer__brand-mark">
-              <IconLeaf />
-            </span>
-            Latten Lawncare
+            <BrandLogo onDark className="footer__logo" />
           </span>
           <p className="footer__tagline">
             Locally owned, fully insured lawn care for small to medium sized

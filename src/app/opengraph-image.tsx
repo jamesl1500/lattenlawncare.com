@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 export const alt = "Latten Lawncare serving Lorain County";
@@ -7,7 +9,10 @@ export const size = {
 };
 export const contentType = "image/png";
 
-export default function OpenGraphImage() {
+export default async function OpenGraphImage() {
+  const logo = await readFile(join(process.cwd(), "public/brand/logo-horizontal-on-dark.png"));
+  const logoSrc = `data:image/png;base64,${logo.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -24,22 +29,25 @@ export default function OpenGraphImage() {
           fontFamily: "Arial, sans-serif",
         }}
       >
-        <div
-          style={{
-            fontSize: 26,
-            fontWeight: 700,
-            textTransform: "uppercase",
-            letterSpacing: "0.08em",
-            color: "#f5a623",
-          }}
-        >
-          Lorain County Lawn Care
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <img src={logoSrc} alt="" width={441} height={144} />
+          <div
+            style={{
+              fontSize: 24,
+              fontWeight: 700,
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+              color: "#f5a623",
+            }}
+          >
+            Lorain County Lawn Care
+          </div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
-          <div style={{ fontSize: 84, fontWeight: 800, lineHeight: 1 }}>Latten Lawncare</div>
-          <div style={{ fontSize: 34, maxWidth: "82%", lineHeight: 1.25 }}>
-            Lawn Cutting, Edging, and Weed Control for Small to Medium Lawns
+          <div style={{ fontSize: 76, fontWeight: 800, lineHeight: 1 }}>Clean cuts. Crisp edges.</div>
+          <div style={{ fontSize: 34, maxWidth: "92%", lineHeight: 1.25 }}>
+            Mowing, Edging, and Leaf Cleanup for Small to Medium Lawns
           </div>
         </div>
 

@@ -7,7 +7,7 @@ describe("SiteFooter", () => {
   it("renders the brand, contact details, and current year", () => {
     render(<SiteFooter />);
 
-    expect(screen.getByText("Latten Lawncare")).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Latten Lawncare" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /\(216\) 889-7822/ })).toHaveAttribute(
       "href",
       "tel:+12168897822",
