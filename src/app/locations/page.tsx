@@ -9,7 +9,7 @@ import { locations } from "@/lib/locations";
 export const metadata: Metadata = {
   title: "Lorain County Service Areas | Latten Lawncare",
   description:
-    "View all Lorain County cities served by Latten Lawncare for lawn cutting, edging, and weed control.",
+    "Lawn mowing, edging, and leaf cleanup in Elyria, Lorain, Avon, North Ridgeville, Amherst, Avon Lake, Sheffield Lake, and Sheffield Village. $40 for small to medium lawns.",
   alternates: {
     canonical: "/locations",
   },
@@ -24,7 +24,7 @@ export default function LocationsPage() {
           <p className="eyebrow">Service Areas</p>
           <h1>Lorain County Locations We Serve</h1>
           <p className="hero__lead">
-            Latten Lawncare provides local lawn cutting, edging, and weed control for
+            Latten Lawncare provides local lawn mowing, edging, and leaf cleanup for
             small to medium lawns throughout Lorain County.
           </p>
         </section>

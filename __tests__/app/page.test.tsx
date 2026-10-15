@@ -19,9 +19,10 @@ describe("Home page", () => {
   it("lists all three core services", () => {
     render(<Home />);
 
-    expect(screen.getByRole("heading", { name: "Lawn Cutting" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Lawn Mowing" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Edging" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Weed Control" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Leaf Cleanup" })).toBeInTheDocument();
+    expect(screen.queryByText(/weed control/i)).not.toBeInTheDocument();
   });
 
   it("shows the $40 starting price", () => {
@@ -47,6 +48,7 @@ describe("Home page", () => {
       screen.getByText("What services does Latten Lawncare offer?"),
     ).toBeInTheDocument();
     expect(screen.getByText("How much is lawn mowing?")).toBeInTheDocument();
+    expect(screen.getByText("How much is leaf cleanup?")).toBeInTheDocument();
     expect(screen.getByText("What areas do you serve?")).toBeInTheDocument();
     expect(screen.getByText("How do I request service?")).toBeInTheDocument();
   });

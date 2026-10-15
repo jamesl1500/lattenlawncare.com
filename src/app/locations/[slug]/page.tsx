@@ -5,7 +5,9 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import MobileCallBar from "@/components/MobileCallBar";
 import { IconCheck, IconMail, IconPhone } from "@/components/icons";
+import { breadcrumbJsonLd, businessId } from "@/lib/business";
 import { locations, siteBaseUrl } from "@/lib/locations";
+import { services } from "@/lib/services";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -25,15 +27,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
+  const title = `Lawn Mowing & Leaf Cleanup in ${location.city}, OH | $40 | Latten Lawncare`;
+  const description = `${location.summary} Mowing with edging or leaf cleanup, $40 for small to medium lawns. Call (216) 889-7822.`;
+
   return {
-    title: `${location.city} Lawn Care | Latten Lawncare`,
-    description: `${location.summary} Call (216) 889-7822 to schedule your next lawn cut in ${location.city}.`,
+    title,
+    description,
     alternates: {
       canonical: `/locations/${location.slug}`,
     },
     openGraph: {
-      title: `${location.city} Lawn Care | Latten Lawncare`,
-      description: location.summary,
+      title,
+      description,
       url: `${siteBaseUrl}/locations/${location.slug}`,
     },
   };
@@ -47,25 +52,57 @@ export default async function LocationDetailPage({ params }: Props) {
     notFound();
   }
 
-  const faqJsonLd = {
+  const pagePath = `/locations/${location.slug}`;
+  const nearby = locations.filter((item) => item.slug !== location.slug);
+  const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: `What lawn services are available in ${location.city}?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Lawn cutting, edging, and weed control for small to medium sized lawns.",
+    "@graph": [
+      ...services.map((service) => ({
+        "@type": "Service",
+        name: `${service.name} in ${location.city}, OH`,
+        serviceType: service.shortName,
+        provider: { "@id": businessId },
+        areaServed: { "@type": "City", name: `${location.city}, OH` },
+        offers: {
+          "@type": "Offer",
+          price: String(service.price),
+          priceCurrency: "USD",
+          url: `${siteBaseUrl}/services/${service.slug}`,
         },
-      },
+      })),
+      breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "Locations", path: "/locations" },
+        { name: location.city, path: pagePath },
+      ]),
       {
-        "@type": "Question",
-        name: `How much does mowing cost in ${location.city}?`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Front and backyard mowing starts at $40.",
-        },
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: `What lawn services are available in ${location.city}?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Lawn mowing with edging included, plus fall leaf cleanup, for small to medium sized lawns.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: `How much does mowing cost in ${location.city}?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Front and backyard mowing starts at $40, and edging is included.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: `How much does leaf cleanup cost in ${location.city}?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Leaf cleanup is $40 for the front and back yard of a small to medium lawn.",
+            },
+          },
+        ],
       },
     ],
   };
@@ -75,7 +112,7 @@ export default async function LocationDetailPage({ params }: Props) {
       <SiteHeader />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main id="main-content">
         <section className="section reveal">
@@ -127,6 +164,23 @@ export default async function LocationDetailPage({ params }: Props) {
           </div>
         </section>
 
+        <section className="section section--highlight reveal reveal--delay-2">
+          <h2>Lawn care services in {location.city}</h2>
+          <div className="service-grid">
+            {services.map((service) => (
+              <article className="card" key={service.slug}>
+                <h3>
+                  <Link href={`/services/${service.slug}`}>{service.name}</Link>
+                </h3>
+                <p>
+                  <strong>${service.price}</strong> {service.priceNote}
+                </p>
+                <p>{service.summary}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className="section section--dark reveal reveal--delay-2">
           <div className="contact-box">
             <p className="eyebrow">Request Service in {location.city}</p>
@@ -145,7 +199,14 @@ export default async function LocationDetailPage({ params }: Props) {
               </a>
             </div>
             <p className="section__linkline">
-              <Link href="/">Back to homepage</Link>
+              Also serving{" "}
+              {nearby.map((item, index) => (
+                <span key={item.slug}>
+                  {index > 0 && ", "}
+                  <Link href={`/locations/${item.slug}`}>{item.city}</Link>
+                </span>
+              ))}
+              . <Link href="/">Back to homepage</Link>
             </p>
           </div>
         </section>

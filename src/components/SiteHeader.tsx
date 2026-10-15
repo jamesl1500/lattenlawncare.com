@@ -9,6 +9,7 @@ import { IconClose, IconMenu, IconPhone } from "@/components/icons";
 
 const navItems = [
   { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
   { href: "/locations", label: "Locations" },
   { href: "/#pricing", label: "Pricing" },
   { href: "/#faq", label: "FAQ" },
