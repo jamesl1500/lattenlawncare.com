@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import TrackedLink from "@/components/TrackedLink";
-import { IconClose, IconLeaf, IconMenu, IconPhone } from "@/components/icons";
+import BrandLogo from "@/components/BrandLogo";
+import { IconClose, IconMenu, IconPhone } from "@/components/icons";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -38,10 +39,7 @@ export default function SiteHeader() {
       <div className="mobile-nav__panel" role="dialog" aria-modal="true">
         <div className="mobile-nav__head">
           <span className="site-header__brand">
-            <span className="site-header__brand-mark">
-              <IconLeaf />
-            </span>
-            Latten Lawncare
+            <BrandLogo className="site-header__logo" />
           </span>
           <button
             type="button"
@@ -83,10 +81,7 @@ export default function SiteHeader() {
     <header className="site-header" role="banner">
       <div className="site-header__inner">
         <Link className="site-header__brand" href="/">
-          <span className="site-header__brand-mark">
-            <IconLeaf />
-          </span>
-          Latten Lawncare
+          <BrandLogo className="site-header__logo" preload />
         </Link>
 
         <nav className="site-header__nav" aria-label="Primary">

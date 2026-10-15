@@ -303,21 +303,10 @@ h3 {
   white-space: nowrap;
 }
 
-.site-header__brand-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.1rem;
-  height: 2.1rem;
-  border-radius: 10px;
-  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
-  color: #fff;
-  flex: none;
-}
-
-.site-header__brand-mark svg {
-  width: 1.2rem;
-  height: 1.2rem;
+.site-header__logo {
+  display: block;
+  width: auto;
+  height: 3rem;
 }
 
 .site-header__nav {
@@ -1177,21 +1166,10 @@ main {
   color: #fff;
 }
 
-.footer__brand-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.1rem;
-  height: 2.1rem;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.12);
-  color: var(--accent);
-  flex: none;
-}
-
-.footer__brand-mark svg {
-  width: 1.2rem;
-  height: 1.2rem;
+.footer__logo {
+  display: block;
+  width: auto;
+  height: 3rem;
 }
 
 .footer__tagline {
