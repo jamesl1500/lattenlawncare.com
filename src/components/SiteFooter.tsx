@@ -24,7 +24,7 @@ export default function SiteFooter() {
           <h4>Quick Links</h4>
           <ul>
             <li>
-              <Link href="/#services">Services</Link>
+              <Link href="/services">Services</Link>
             </li>
             <li>
               <Link href="/#pricing">Pricing</Link>

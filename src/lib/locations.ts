@@ -12,7 +12,7 @@ export const locations: LocationInfo[] = [
     city: "Elyria",
     headline: "Lawn Care in Elyria, OH",
     summary:
-      "Consistent mowing, edging, and weed control for small to medium lawns across Elyria.",
+      "Consistent mowing, edging, and leaf cleanup for small to medium lawns across Elyria.",
     neighborhoods: ["Midview", "West Ridge", "North Elyria"],
   },
   {

@@ -8,6 +8,7 @@ import {
   IconCalendar,
   IconCheck,
   IconEdge,
+  IconLeaf,
   IconMail,
   IconMapPin,
   IconMower,
@@ -16,7 +17,9 @@ import {
   IconShield,
   IconSpark,
 } from "@/components/icons";
+import { localBusinessJsonLd } from "@/lib/business";
 import { locations } from "@/lib/locations";
+import { services as serviceOffers } from "@/lib/services";
 
 const trustBadges = [
   { icon: IconShield, label: "Fully Insured" },
@@ -28,21 +31,24 @@ const trustBadges = [
 const services = [
   {
     icon: IconMower,
-    title: "Lawn Cutting",
+    title: "Lawn Mowing",
+    href: "/services/lawn-mowing",
     description:
       "Precision mowing for small to medium lawns with clean patterns and even height for a polished look.",
   },
   {
     icon: IconEdge,
     title: "Edging",
+    href: "/services/lawn-mowing",
     description:
       "Sharp, defined lines along sidewalks, driveways, and beds to frame your lawn and boost curb appeal.",
   },
   {
-    icon: IconShield,
-    title: "Weed Control",
+    icon: IconLeaf,
+    title: "Leaf Cleanup",
+    href: "/services/leaf-cleanup",
     description:
-      "Targeted weed management to help your grass thrive and keep your yard looking neat through the season.",
+      "Fall leaves cleared from the front and back yard so your grass can breathe heading into winter. $40 for small to medium lawns.",
   },
 ];
 
@@ -93,7 +99,7 @@ const faqItems = [
   {
     question: "What services does Latten Lawncare offer?",
     answer:
-      "We provide lawn cutting, edging, and weed control focused on small to medium sized lawns.",
+      "We provide lawn mowing with edging included, plus fall leaf cleanup, for small to medium sized lawns.",
   },
   {
     question: "How much is lawn mowing?",
@@ -101,9 +107,13 @@ const faqItems = [
       "Front and backyard mowing starts at $40, with dependable local service across Lorain County.",
   },
   {
+    question: "How much is leaf cleanup?",
+    answer: "Leaf cleanup is $40 for the front and back yard of a small to medium lawn.",
+  },
+  {
     question: "What areas do you serve?",
     answer:
-      "We serve Lorain County, including Elyria, Lorain, Avon, North Ridgeville, and Amherst.",
+      `We serve Lorain County, including ${locations.map((location) => location.city).join(", ").replace(/, ([^,]*)$/, ", and $1")}.`,
   },
   {
     question: "How do I request service?",
@@ -117,30 +127,15 @@ export default function Home() {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "LocalBusiness",
-        name: "Latten Lawncare",
-        areaServed: "Lorain County, Ohio",
-        telephone: "+1-216-889-7822",
-        email: "hello@lattenlawncare.com",
-        description:
-          "Local lawn care company offering lawn cutting, edging, and weed control for small to medium sized lawns.",
-        offers: [
-          {
-            "@type": "Offer",
-            name: "Lawn Cutting",
-            priceCurrency: "USD",
-            price: "40",
-            description: "Front and backyard cut for small to medium lawns.",
-          },
-          {
-            "@type": "Offer",
-            name: "Edging",
-          },
-          {
-            "@type": "Offer",
-            name: "Weed Control",
-          },
-        ],
+        ...localBusinessJsonLd(
+          "Local lawn care company offering lawn mowing with edging and fall leaf cleanup for small to medium sized lawns in Lorain County, Ohio.",
+        ),
+        makesOffer: serviceOffers.map((service) => ({
+          "@type": "Offer",
+          price: String(service.price),
+          priceCurrency: "USD",
+          itemOffered: { "@type": "Service", name: service.name },
+        })),
       },
       {
         "@type": "FAQPage",
@@ -158,13 +153,12 @@ export default function Home() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-
       <div className="site-shell">
         <SiteHeader />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         <header className="hero">
           <div className="hero__overlay" />
           <div className="hero__content reveal">
@@ -261,7 +255,9 @@ export default function Home() {
                   <span className="card__icon">
                     <service.icon />
                   </span>
-                  <h3>{service.title}</h3>
+                  <h3>
+                    <Link href={service.href}>{service.title}</Link>
+                  </h3>
                   <p>{service.description}</p>
                 </article>
               ))}

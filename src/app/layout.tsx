@@ -16,15 +16,16 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.lattenlawncare.com"),
   title: "Latten Lawncare | Affordable Lawn Care in Lorain County",
   description:
-    "Latten Lawncare provides reliable lawn cutting, edging, and weed control in Lorain County. Front and backyard cuts start at $40 for small to medium lawns.",
+    "Latten Lawncare provides lawn mowing, edging, and leaf cleanup in Lorain County, OH. Front and back yard service is $40 for small to medium lawns. Call (216) 889-7822.",
   alternates: {
     canonical: "/",
   },
   keywords: [
     "Lorain County lawn care",
-    "lawn cutting Lorain County",
+    "lawn mowing Lorain County",
+    "lawn mowing Elyria",
     "edging service",
-    "weed control",
+    "leaf cleanup Lorain County",
     "affordable lawn mowing",
     "Latten Lawncare",
   ],
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     siteName: "Latten Lawncare",
     title: "Latten Lawncare",
     description:
-      "Local lawn cutting, edging, and weed control for Lorain County homeowners.",
+      "Local lawn mowing, edging, and leaf cleanup for Lorain County homeowners. $40 for small to medium lawns.",
     type: "website",
     locale: "en_US",
     images: [
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Latten Lawncare",
     description:
-      "Lawn cutting, edging, and weed control for homeowners across Lorain County.",
+      "Lawn mowing, edging, and leaf cleanup for homeowners across Lorain County. $40 for small to medium lawns.",
     images: ["/opengraph-image"],
   },
   robots: {

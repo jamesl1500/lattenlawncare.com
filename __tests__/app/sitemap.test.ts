@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import sitemap from "@/app/sitemap";
 import { locations, siteBaseUrl } from "@/lib/locations";
+import { services } from "@/lib/services";
 
 describe("sitemap", () => {
   it("includes the homepage and locations index", () => {
@@ -17,6 +18,15 @@ describe("sitemap", () => {
 
     for (const location of locations) {
       expect(urls).toContain(`${siteBaseUrl}/locations/${location.slug}`);
+    }
+  });
+
+  it("includes the services index and every service page", () => {
+    const urls = sitemap().map((entry) => entry.url);
+
+    expect(urls).toContain(`${siteBaseUrl}/services`);
+    for (const service of services) {
+      expect(urls).toContain(`${siteBaseUrl}/services/${service.slug}`);
     }
   });
 
