@@ -41,6 +41,12 @@ describe("Home page", () => {
     }
   });
 
+  it("does not show testimonials until there are real customer reviews", () => {
+    render(<Home />);
+
+    expect(screen.queryByRole("heading", { name: /what local homeowners are saying/i })).not.toBeInTheDocument();
+  });
+
   it("renders all FAQ questions", () => {
     render(<Home />);
 

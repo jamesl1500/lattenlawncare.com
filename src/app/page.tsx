@@ -13,7 +13,6 @@ import {
   IconMapPin,
   IconMower,
   IconPhone,
-  IconQuote,
   IconShield,
   IconSpark,
 } from "@/components/icons";
@@ -72,27 +71,6 @@ const pricingInclusions = [
   "Careful attention to detail around edges, beds, and obstacles",
   "Grass clippings cleared from walkways and driveways",
   "Consistent local service you can count on, visit after visit",
-];
-
-const testimonials = [
-  {
-    quote:
-      "Fast response, clean cut, and the edging made the whole front yard look brand new.",
-    name: "Homeowner",
-    location: "Elyria, OH",
-  },
-  {
-    quote:
-      "Exactly what I needed for a small lawn. Great communication and fair pricing.",
-    name: "Homeowner",
-    location: "Lorain, OH",
-  },
-  {
-    quote:
-      "Consistent every visit. Yard always looks sharp when James is done.",
-    name: "Homeowner",
-    location: "North Ridgeville, OH",
-  },
 ];
 
 const faqItems = [
@@ -394,27 +372,6 @@ export default function Home() {
                   <IconMapPin />
                   {location.city}
                 </TrackedLink>
-              ))}
-            </div>
-          </section>
-
-          <section className="section section--highlight reveal reveal--delay-3" id="testimonials">
-            <div className="section__heading">
-              <p className="eyebrow">Client Feedback</p>
-              <h2>What local homeowners are saying</h2>
-            </div>
-            <div className="testimonial-grid">
-              {testimonials.map((testimonial) => (
-                <blockquote className="card testimonial-card" key={testimonial.quote}>
-                  <IconQuote className="testimonial-card__quote-mark" />
-                  <p>&ldquo;{testimonial.quote}&rdquo;</p>
-                  <cite>
-                    <span className="testimonial-card__avatar">
-                      {testimonial.name.charAt(0)}
-                    </span>
-                    {testimonial.name} in {testimonial.location}
-                  </cite>
-                </blockquote>
               ))}
             </div>
           </section>
