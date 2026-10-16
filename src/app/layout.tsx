@@ -14,27 +14,36 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.lattenlawncare.com"),
-  title: "Latten Lawncare | Affordable Lawn Care in Lorain County",
+  title: "Fall Leaf Cleanup in Lorain County, OH | We Blow, Rake & Bag | Latten Lawncare",
   description:
-    "Latten Lawncare provides lawn mowing, edging, and leaf cleanup in Lorain County, OH. Front and back yard service is $40 for small to medium lawns. Call (216) 889-7822.",
+    "Fall leaf cleanup in Lorain County, OH: we blow, rake, and bag your leaves for $40 (front and back yard, small to medium lawns). Lawn mowing and edging too. Call (216) 889-7822.",
   alternates: {
     canonical: "/",
   },
   keywords: [
+    "leaf cleanup Lorain County",
+    "fall leaf cleanup",
+    "leaf removal near me",
+    "leaf raking service",
+    "leaf blowing service",
+    "leaf bagging",
+    "leaf cleanup Elyria",
+    "leaf cleanup Avon",
+    "leaf cleanup North Ridgeville",
+    "leaf cleanup Lorain",
     "Lorain County lawn care",
     "lawn mowing Lorain County",
     "lawn mowing Elyria",
     "edging service",
-    "leaf cleanup Lorain County",
     "affordable lawn mowing",
     "Latten Lawncare",
   ],
   openGraph: {
     url: "https://www.lattenlawncare.com",
     siteName: "Latten Lawncare",
-    title: "Latten Lawncare",
+    title: "Fall Leaf Cleanup | Latten Lawncare",
     description:
-      "Local lawn mowing, edging, and leaf cleanup for Lorain County homeowners. $40 for small to medium lawns.",
+      "We blow, rake, and bag your leaves. Fall leaf cleanup for Lorain County homeowners, $40 for small to medium lawns.",
     type: "website",
     locale: "en_US",
     images: [
@@ -42,15 +51,15 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Latten Lawncare serving Lorain County",
+        alt: "Latten Lawncare fall leaf cleanup in Lorain County",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Latten Lawncare",
+    title: "Fall Leaf Cleanup | Latten Lawncare",
     description:
-      "Lawn mowing, edging, and leaf cleanup for homeowners across Lorain County. $40 for small to medium lawns.",
+      "We blow, rake, and bag your leaves. Fall leaf cleanup across Lorain County, $40 for small to medium lawns.",
     images: ["/opengraph-image"],
   },
   robots: {
