@@ -71,4 +71,18 @@ describe("Home page", () => {
     expect(types).toContain("LocalBusiness");
     expect(types).toContain("FAQPage");
   });
+
+  it("features fall leaf cleanup: blow, rake, and bag", () => {
+    render(<Home />);
+
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(/leaf cleanup/i);
+    expect(screen.getByRole("heading", { name: "We blow, rake, and bag your leaves" })).toBeInTheDocument();
+    for (const step of ["Blow", "Rake", "Bag"]) {
+      expect(screen.getByRole("heading", { name: step })).toBeInTheDocument();
+    }
+    expect(screen.getByRole("link", { name: "More about leaf cleanup" })).toHaveAttribute(
+      "href",
+      "/services/leaf-cleanup",
+    );
+  });
 });

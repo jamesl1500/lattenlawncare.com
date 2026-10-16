@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: service.metaTitle,
     description: service.metaDescription,
+    keywords: service.keywords,
     alternates: {
       canonical: `/services/${service.slug}`,
     },
@@ -55,6 +56,7 @@ export default async function ServiceDetailPage({ params }: Props) {
         name: service.name,
         serviceType: service.shortName,
         description: service.summary,
+        ...(service.keywords && { alternateName: service.keywords }),
         provider: { "@id": businessId },
         areaServed,
         offers: {
@@ -130,6 +132,26 @@ export default async function ServiceDetailPage({ params }: Props) {
             </div>
           </div>
         </section>
+
+        {service.steps && (
+          <section className="section section--highlight reveal reveal--delay-1">
+            <div className="section__heading section__heading--center">
+              <p className="eyebrow">How we do it</p>
+              <h2>
+                {service.steps.map((step) => step.title).join(", ").replace(/, ([^,]*)$/, ", and $1")}
+              </h2>
+            </div>
+            <div className="process-grid">
+              {service.steps.map((step, index) => (
+                <div className="process-step" key={step.title}>
+                  <span className="process-step__index">{index + 1}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         <section className="section reveal reveal--delay-2">
           <div className="section__heading">

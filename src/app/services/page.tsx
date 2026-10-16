@@ -11,7 +11,7 @@ import { siteBaseUrl } from "@/lib/locations";
 export const metadata: Metadata = {
   title: "Lawn Care Services & Pricing | Latten Lawncare",
   description:
-    "Lawn mowing with edging and fall leaf cleanup, each $40 for small to medium lawns in Lorain County, OH. Call or text (216) 889-7822 for a free quote.",
+    "Fall leaf cleanup (we blow, rake, and bag) and lawn mowing with edging, each $40 for small to medium lawns in Lorain County, OH. Call or text (216) 889-7822 for a free quote.",
   alternates: {
     canonical: "/services",
   },
