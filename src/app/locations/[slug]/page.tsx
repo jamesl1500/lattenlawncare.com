@@ -27,8 +27,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const title = `Lawn Mowing & Leaf Cleanup in ${location.city}, OH | $40 | Latten Lawncare`;
-  const description = `${location.summary} Mowing with edging or leaf cleanup, $40 for small to medium lawns. Call (216) 889-7822.`;
+  const title = `Leaf Cleanup & Lawn Mowing in ${location.city}, OH | $40 | Latten Lawncare`;
+  const description = `Fall leaf cleanup in ${location.city}: we blow, rake, and bag your leaves for $40. ${location.summary} Call (216) 889-7822.`;
 
   return {
     title,
@@ -83,7 +83,7 @@ export default async function LocationDetailPage({ params }: Props) {
             name: `What lawn services are available in ${location.city}?`,
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Lawn mowing with edging included, plus fall leaf cleanup, for small to medium sized lawns.",
+              text: "Fall leaf cleanup (we blow, rake, and bag your leaves) and lawn mowing with edging included, for small to medium sized lawns.",
             },
           },
           {
@@ -99,7 +99,7 @@ export default async function LocationDetailPage({ params }: Props) {
             name: `How much does leaf cleanup cost in ${location.city}?`,
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Leaf cleanup is $40 for the front and back yard of a small to medium lawn.",
+              text: "Leaf cleanup is $40 for the front and back yard of a small to medium lawn, including blowing, raking, and bagging the leaves.",
             },
           },
         ],
@@ -154,6 +154,10 @@ export default async function LocationDetailPage({ params }: Props) {
                 <li>
                   <IconCheck />
                   <span>Reliable mowing and clean edging detail</span>
+                </li>
+                <li>
+                  <IconCheck />
+                  <span>Fall leaf cleanup: leaves blown, raked, and bagged</span>
                 </li>
                 <li>
                   <IconCheck />

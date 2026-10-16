@@ -41,4 +41,18 @@ describe("ServiceDetailPage", () => {
     expect(metadata.title).toBe(service.metaTitle);
     expect(metadata.alternates?.canonical).toBe(`/services/${service.slug}`);
   });
+
+  it("shows the blow, rake, and bag steps on the leaf cleanup page", async () => {
+    render(await ServiceDetailPage({ params: Promise.resolve({ slug: "leaf-cleanup" }) }));
+
+    expect(screen.getByRole("heading", { name: "Blow, Rake, and Bag" })).toBeInTheDocument();
+    expect(screen.getByText(/bagged and set out, ready for yard waste pickup/i)).toBeInTheDocument();
+  });
+
+  it("targets leaf blowing, raking, and bagging in the leaf cleanup metadata", async () => {
+    const metadata = await generateMetadata({ params: Promise.resolve({ slug: "leaf-cleanup" }) });
+
+    expect(metadata.title).toMatch(/blow, rake & bag/i);
+    expect(metadata.keywords).toEqual(expect.arrayContaining(["leaf blowing", "leaf raking", "leaf bagging"]));
+  });
 });

@@ -18,7 +18,9 @@ import {
 } from "@/components/icons";
 import { localBusinessJsonLd } from "@/lib/business";
 import { locations } from "@/lib/locations";
-import { services as serviceOffers } from "@/lib/services";
+import { getService, services as serviceOffers } from "@/lib/services";
+
+const leafCleanup = getService("leaf-cleanup")!;
 
 const trustBadges = [
   { icon: IconShield, label: "Fully Insured" },
@@ -28,6 +30,13 @@ const trustBadges = [
 ];
 
 const services = [
+  {
+    icon: IconLeaf,
+    title: "Leaf Cleanup",
+    href: "/services/leaf-cleanup",
+    description:
+      "We blow, rake, and bag the leaves in your front and back yard so your grass can breathe heading into winter. $40 for small to medium lawns.",
+  },
   {
     icon: IconMower,
     title: "Lawn Mowing",
@@ -41,13 +50,6 @@ const services = [
     href: "/services/lawn-mowing",
     description:
       "Sharp, defined lines along sidewalks, driveways, and beds to frame your lawn and boost curb appeal.",
-  },
-  {
-    icon: IconLeaf,
-    title: "Leaf Cleanup",
-    href: "/services/leaf-cleanup",
-    description:
-      "Fall leaves cleared from the front and back yard so your grass can breathe heading into winter. $40 for small to medium lawns.",
   },
 ];
 
@@ -77,7 +79,7 @@ const faqItems = [
   {
     question: "What services does Latten Lawncare offer?",
     answer:
-      "We provide lawn mowing with edging included, plus fall leaf cleanup, for small to medium sized lawns.",
+      "We provide fall leaf cleanup (we blow, rake, and bag your leaves) and lawn mowing with edging included, for small to medium sized lawns.",
   },
   {
     question: "How much is lawn mowing?",
@@ -86,7 +88,13 @@ const faqItems = [
   },
   {
     question: "How much is leaf cleanup?",
-    answer: "Leaf cleanup is $40 for the front and back yard of a small to medium lawn.",
+    answer:
+      "Leaf cleanup is $40 for the front and back yard of a small to medium lawn. That includes blowing, raking, and bagging all the leaves.",
+  },
+  {
+    question: "Do you bag the leaves?",
+    answer:
+      "Yes. We blow the leaves out of beds and corners, rake the lawn clean, and bag every leaf so the bags are ready for yard waste pickup.",
   },
   {
     question: "What areas do you serve?",
@@ -106,7 +114,7 @@ export default function Home() {
     "@graph": [
       {
         ...localBusinessJsonLd(
-          "Local lawn care company offering lawn mowing with edging and fall leaf cleanup for small to medium sized lawns in Lorain County, Ohio.",
+          "Local lawn care company offering fall leaf cleanup (leaf blowing, raking, and bagging) and lawn mowing with edging for small to medium sized lawns in Lorain County, Ohio.",
         ),
         makesOffer: serviceOffers.map((service) => ({
           "@type": "Offer",
@@ -142,12 +150,14 @@ export default function Home() {
           <div className="hero__content reveal">
             <div className="hero__grid">
               <div className="hero__copy">
-                <p className="eyebrow">Lorain County Lawn Care</p>
-                <h1>Clean cuts. Crisp edges. A lawn you&apos;ll actually be proud of.</h1>
+                <p className="eyebrow">Fall Leaf Cleanup in Lorain County</p>
+                <h1>Fall leaf cleanup, done for you. We blow, rake, and bag.</h1>
                 <p className="hero__lead">
-                  Latten Lawncare is a local, owner-operated company focused on
-                  fast, affordable mowing and edging for small to medium sized
-                  yards &mdash; no long contracts, no runaround.
+                  Latten Lawncare is a local, owner-operated company. This fall
+                  we clear the leaves from your front and back yard, bag them
+                  up, and leave your lawn clean for winter. We mow and edge
+                  small to medium yards too, with no long contracts and no
+                  runaround.
                 </p>
 
                 <div className="hero__badges">
@@ -180,7 +190,7 @@ export default function Home() {
                   </TrackedLink>
                 </div>
                 <p className="hero__note">
-                  Starting at <strong>$40</strong> for front and backyard mowing.
+                  Leaf cleanup is <strong>$40</strong> for the front and back yard, blown, raked, and bagged.
                 </p>
               </div>
 
@@ -219,6 +229,40 @@ export default function Home() {
                   {badge.label}
                 </span>
               ))}
+            </div>
+          </section>
+
+          <section className="section section--highlight reveal reveal--delay-1" id="leaf-cleanup">
+            <div className="section__heading section__heading--center">
+              <p className="eyebrow">Fall Leaf Cleanup</p>
+              <h2>We blow, rake, and bag your leaves</h2>
+              <p>
+                One flat price of <strong>$40</strong>{" "}covers the front and back yard of a small
+                to medium lawn. You don&apos;t lift a rake or fill a single bag.
+              </p>
+            </div>
+            <div className="process-grid">
+              {leafCleanup.steps?.map((step, index) => (
+                <div className="process-step" key={step.title}>
+                  <span className="process-step__index">{index + 1}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </div>
+              ))}
+            </div>
+            <div className="hero__cta-group">
+              <TrackedLink
+                className="btn btn--primary"
+                href="tel:+12168897822"
+                trackingEvent="conversion_call_click"
+                trackingLabel="Leaf Cleanup Call"
+              >
+                <IconPhone />
+                Book a leaf cleanup
+              </TrackedLink>
+              <Link className="btn btn--ghost" href="/services/leaf-cleanup">
+                More about leaf cleanup
+              </Link>
             </div>
           </section>
 

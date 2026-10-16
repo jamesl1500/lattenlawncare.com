@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
-export const alt = "Latten Lawncare serving Lorain County";
+export const alt = "Latten Lawncare fall leaf cleanup in Lorain County";
 export const size = {
   width: 1200,
   height: 630,
@@ -45,9 +45,9 @@ export default async function OpenGraphImage() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
-          <div style={{ fontSize: 76, fontWeight: 800, lineHeight: 1 }}>Clean cuts. Crisp edges.</div>
+          <div style={{ fontSize: 76, fontWeight: 800, lineHeight: 1 }}>Fall Leaf Cleanup</div>
           <div style={{ fontSize: 34, maxWidth: "92%", lineHeight: 1.25 }}>
-            Mowing, Edging, and Leaf Cleanup for Small to Medium Lawns
+            We Blow, Rake, and Bag Your Leaves. Mowing and Edging Too.
           </div>
         </div>
 
@@ -61,7 +61,7 @@ export default async function OpenGraphImage() {
           }}
         >
           <span>(216) 889-7822</span>
-          <span>Starting at $40</span>
+          <span>Leaf Cleanup $40</span>
         </div>
       </div>
     ),
