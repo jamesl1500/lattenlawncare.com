@@ -1134,6 +1134,11 @@ main {
   main {
     padding-bottom: 5.5rem;
   }
+
+  /* Keep the footer's last line above the fixed call bar. */
+  .footer__bottom {
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
+  }
 }
 
 /* ---------------------------------------------------------------- */
@@ -1231,6 +1236,16 @@ main {
   gap: 0.5rem;
   font-size: 0.85rem;
   color: #a9c6af;
+}
+
+.footer__credit-link {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footer__credit-link:hover {
+  color: var(--accent);
 }
 
 /* ---------------------------------------------------------------- */

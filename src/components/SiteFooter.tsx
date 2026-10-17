@@ -76,6 +76,17 @@ export default function SiteFooter() {
         <div className="footer__bottom-inner">
           <span>&copy; {year} Latten Lawncare. All rights reserved.</span>
           <span>Fully insured &middot; Serving Lorain County, Ohio</span>
+          <span>
+            Designed by{" "}
+            <a
+              className="footer__credit-link"
+              href="https://www.foundryframe.com/"
+              target="_blank"
+              rel="noopener"
+            >
+              Foundry Frame
+            </a>
+          </span>
         </div>
       </div>
     </footer>

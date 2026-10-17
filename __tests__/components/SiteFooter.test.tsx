@@ -21,6 +21,16 @@ describe("SiteFooter", () => {
     expect(screen.getByText(new RegExp(year))).toBeInTheDocument();
   });
 
+  it("credits Foundry Frame with a link to their site", () => {
+    render(<SiteFooter />);
+
+    expect(screen.getByText(/designed by/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Foundry Frame" })).toHaveAttribute(
+      "href",
+      "https://www.foundryframe.com/",
+    );
+  });
+
   it("links to a subset of service area pages", () => {
     render(<SiteFooter />);
 
