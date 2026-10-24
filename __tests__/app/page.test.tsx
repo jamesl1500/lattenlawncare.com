@@ -85,4 +85,28 @@ describe("Home page", () => {
       "/services/leaf-cleanup",
     );
   });
+
+  it("offers text and quote-form CTAs alongside calling", () => {
+    const { container } = render(<Home />);
+
+    expect(screen.getAllByRole("link", { name: /text for a quote/i })[0]).toHaveAttribute(
+      "href",
+      expect.stringMatching(/^sms:\+12168897822\?body=/),
+    );
+    expect(container.querySelector("#quote form")).not.toBeNull();
+    expect(screen.getByRole("heading", { name: "Fall Leaf Cleanup" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Lawn Mowing & Edging" })).toBeInTheDocument();
+  });
+
+  it("describes the business as a service-area LocalBusiness with an owner", () => {
+    const { container } = render(<Home />);
+    const data = JSON.parse(
+      container.querySelector('script[type="application/ld+json"]')?.innerHTML ?? "{}",
+    );
+    const business = data["@graph"].find((node: { "@type": string }) => node["@type"] === "LocalBusiness");
+
+    expect(business.address).toMatchObject({ addressRegion: "OH", addressCountry: "US" });
+    expect(business.address.streetAddress).toBeUndefined();
+    expect(business.founder.name).toBe("James Latten");
+  });
 });

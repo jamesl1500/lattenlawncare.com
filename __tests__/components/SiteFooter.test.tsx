@@ -8,9 +8,13 @@ describe("SiteFooter", () => {
     render(<SiteFooter />);
 
     expect(screen.getByRole("img", { name: "Latten Lawncare" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /\(216\) 889-7822/ })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /^\(216\) 889-7822/ })).toHaveAttribute(
       "href",
       "tel:+12168897822",
+    );
+    expect(screen.getByRole("link", { name: /text \(216\) 889-7822/i })).toHaveAttribute(
+      "href",
+      expect.stringMatching(/^sms:\+12168897822\?body=/),
     );
     expect(screen.getByRole("link", { name: /hello@lattenlawncare\.com/ })).toHaveAttribute(
       "href",

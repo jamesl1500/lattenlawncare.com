@@ -1,12 +1,13 @@
 import TrackedLink from "@/components/TrackedLink";
-import { IconMail, IconPhone } from "@/components/icons";
+import { IconChat, IconPhone } from "@/components/icons";
+import { business, defaultTextMessage, smsLink } from "@/lib/business";
 
 export default function MobileCallBar() {
   return (
     <div className="mobile-cta-bar" role="complementary" aria-label="Quick contact">
       <TrackedLink
         className="btn btn--primary"
-        href="tel:+12168897822"
+        href={business.phoneHref}
         trackingEvent="conversion_call_click"
         trackingLabel="Sticky Bar Call"
       >
@@ -15,12 +16,12 @@ export default function MobileCallBar() {
       </TrackedLink>
       <TrackedLink
         className="btn btn--ghost"
-        href="mailto:hello@lattenlawncare.com"
-        trackingEvent="conversion_email_click"
-        trackingLabel="Sticky Bar Email"
+        href={smsLink(defaultTextMessage)}
+        trackingEvent="conversion_text_click"
+        trackingLabel="Sticky Bar Text"
       >
-        <IconMail />
-        Email
+        <IconChat />
+        Text Us
       </TrackedLink>
     </div>
   );

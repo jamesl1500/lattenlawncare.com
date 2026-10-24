@@ -3,8 +3,8 @@ import Link from "next/link";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import MobileCallBar from "@/components/MobileCallBar";
-import { IconCheck, IconLeaf, IconMower, IconPhone } from "@/components/icons";
-import { breadcrumbJsonLd, business, businessId } from "@/lib/business";
+import { IconChat, IconCheck, IconLeaf, IconMower, IconPhone } from "@/components/icons";
+import { breadcrumbJsonLd, business, businessId, defaultTextMessage, smsLink } from "@/lib/business";
 import { services } from "@/lib/services";
 import { siteBaseUrl } from "@/lib/locations";
 
@@ -102,6 +102,13 @@ export default function ServicesPage() {
                 <IconPhone />
                 {business.phoneDisplay}
               </a>
+              <a className="btn btn--outline" href={smsLink(defaultTextMessage)}>
+                <IconChat />
+                Text us
+              </a>
+              <Link className="btn btn--outline" href="/#quote">
+                Free quote form
+              </Link>
             </div>
           </div>
         </section>
