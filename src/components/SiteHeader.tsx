@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import TrackedLink from "@/components/TrackedLink";
 import BrandLogo from "@/components/BrandLogo";
-import { IconClose, IconMenu, IconPhone } from "@/components/icons";
+import { IconChat, IconClose, IconMenu, IconPhone } from "@/components/icons";
+import { defaultTextMessage, smsLink } from "@/lib/business";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -75,6 +76,15 @@ export default function SiteHeader() {
           <IconPhone />
           Call (216) 889-7822
         </TrackedLink>
+        <TrackedLink
+          className="btn btn--ghost btn--block"
+          href={smsLink(defaultTextMessage)}
+          trackingEvent="conversion_text_click"
+          trackingLabel="Mobile Nav Text"
+        >
+          <IconChat />
+          Text for a quote
+        </TrackedLink>
       </div>
     </div>
   );
@@ -107,11 +117,11 @@ export default function SiteHeader() {
             </TrackedLink>
             <TrackedLink
               className="btn btn--primary btn--sm"
-              href="mailto:hello@lattenlawncare.com"
-              trackingEvent="conversion_email_click"
-              trackingLabel="Header Email"
+              href="/#quote"
+              trackingEvent="quote_cta_click"
+              trackingLabel="Header Quote"
             >
-              Get a Quote
+              Get a Free Quote
             </TrackedLink>
           </div>
 

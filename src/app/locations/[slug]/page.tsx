@@ -4,8 +4,8 @@ import { notFound } from "next/navigation";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import MobileCallBar from "@/components/MobileCallBar";
-import { IconCheck, IconMail, IconPhone } from "@/components/icons";
-import { breadcrumbJsonLd, businessId } from "@/lib/business";
+import { IconChat, IconCheck, IconMail, IconPhone } from "@/components/icons";
+import { breadcrumbJsonLd, business, businessId, smsLink } from "@/lib/business";
 import { locations, siteBaseUrl } from "@/lib/locations";
 import { services } from "@/lib/services";
 
@@ -124,9 +124,12 @@ export default async function LocationDetailPage({ params }: Props) {
               <IconPhone />
               Call (216) 889-7822
             </a>
-            <a className="btn btn--ghost" href="mailto:hello@lattenlawncare.com">
-              <IconMail />
-              Email hello@lattenlawncare.com
+            <a
+              className="btn btn--ghost"
+              href={smsLink(`Hi James, I'd like a lawn care quote in ${location.city}. My address is: `)}
+            >
+              <IconChat />
+              Text for a Quote
             </a>
           </div>
         </section>
@@ -197,7 +200,14 @@ export default async function LocationDetailPage({ params }: Props) {
                 <IconPhone />
                 (216) 889-7822
               </a>
-              <a className="btn btn--outline" href="mailto:hello@lattenlawncare.com">
+              <a
+                className="btn btn--outline"
+                href={smsLink(`Hi James, I'd like a lawn care quote in ${location.city}. My address is: `)}
+              >
+                <IconChat />
+                Text us
+              </a>
+              <a className="btn btn--outline" href={`mailto:${business.email}`}>
                 <IconMail />
                 hello@lattenlawncare.com
               </a>

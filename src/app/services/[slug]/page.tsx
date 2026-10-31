@@ -4,8 +4,8 @@ import { notFound } from "next/navigation";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import MobileCallBar from "@/components/MobileCallBar";
-import { IconCheck, IconMail, IconPhone } from "@/components/icons";
-import { areaServed, breadcrumbJsonLd, business, businessId } from "@/lib/business";
+import { IconChat, IconCheck, IconMail, IconPhone } from "@/components/icons";
+import { areaServed, breadcrumbJsonLd, business, businessId, smsLink } from "@/lib/business";
 import { locations, siteBaseUrl } from "@/lib/locations";
 import { getService, services } from "@/lib/services";
 
@@ -48,6 +48,7 @@ export default async function ServiceDetailPage({ params }: Props) {
     notFound();
   }
 
+  const quoteText = `Hi James, I'd like a quote for ${service.shortName.toLowerCase()}. My address is: `;
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -96,9 +97,9 @@ export default async function ServiceDetailPage({ params }: Props) {
               <IconPhone />
               Call {business.phoneDisplay}
             </a>
-            <a className="btn btn--ghost" href={`mailto:${business.email}`}>
-              <IconMail />
-              Email {business.email}
+            <a className="btn btn--ghost" href={smsLink(quoteText)}>
+              <IconChat />
+              Text for a Quote
             </a>
           </div>
         </section>
@@ -165,6 +166,30 @@ export default async function ServiceDetailPage({ params }: Props) {
                 <p>{faq.answer}</p>
               </details>
             ))}
+          </div>
+        </section>
+
+        <section className="section section--dark reveal reveal--delay-2">
+          <div className="contact-box">
+            <p className="eyebrow">Free quotes</p>
+            <h2>Book your {service.shortName.toLowerCase()}</h2>
+            <p className="contact-box__lead">
+              Call or text with your address and James will get you on the schedule, usually the same week.
+            </p>
+            <div className="contact-box__links">
+              <a className="btn btn--accent" href={business.phoneHref}>
+                <IconPhone />
+                {business.phoneDisplay}
+              </a>
+              <a className="btn btn--outline" href={smsLink(quoteText)}>
+                <IconChat />
+                Text us
+              </a>
+              <a className="btn btn--outline" href={`mailto:${business.email}`}>
+                <IconMail />
+                {business.email}
+              </a>
+            </div>
           </div>
         </section>
 

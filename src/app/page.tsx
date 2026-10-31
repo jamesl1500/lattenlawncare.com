@@ -4,8 +4,10 @@ import TrackedLink from "@/components/TrackedLink";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import MobileCallBar from "@/components/MobileCallBar";
+import QuoteForm from "@/components/QuoteForm";
 import {
   IconCalendar,
+  IconChat,
   IconCheck,
   IconEdge,
   IconLeaf,
@@ -16,7 +18,7 @@ import {
   IconShield,
   IconSpark,
 } from "@/components/icons";
-import { localBusinessJsonLd } from "@/lib/business";
+import { business, defaultTextMessage, localBusinessJsonLd, smsLink } from "@/lib/business";
 import { locations } from "@/lib/locations";
 import { getService, services as serviceOffers } from "@/lib/services";
 
@@ -27,6 +29,14 @@ const trustBadges = [
   { icon: IconCalendar, label: "Same-Week Scheduling" },
   { icon: IconMapPin, label: "Locally Owned in Lorain County" },
   { icon: IconSpark, label: "Free, No-Obligation Quotes" },
+];
+
+/** Plain facts about the offer, shown right under the hero so visitors can scan them. */
+const quickFacts = [
+  { value: "$40", label: "flat price per visit" },
+  { value: "Front + back", label: "both yards, every time" },
+  { value: "No contracts", label: "book once or every week" },
+  { value: "Same week", label: "scheduling in most cases" },
 ];
 
 const services = [
@@ -56,7 +66,7 @@ const services = [
 const processSteps = [
   {
     title: "Reach Out",
-    description: "Call or email with your address and lawn size, and we will get back to you fast.",
+    description: "Call, text, or send the quick quote form with your address, and James gets back to you fast.",
   },
   {
     title: "Get Scheduled",
@@ -64,15 +74,41 @@ const processSteps = [
   },
   {
     title: "Enjoy Your Lawn",
-    description: "Relax while we handle the mowing, edging, and detail work every visit.",
+    description: "Relax while we handle the leaves, mowing, edging, and cleanup. You only pay $40 a visit.",
   },
 ];
 
-const pricingInclusions = [
-  "Full front and backyard mow",
-  "Careful attention to detail around edges, beds, and obstacles",
-  "Grass clippings cleared from walkways and driveways",
-  "Consistent local service you can count on, visit after visit",
+const pricingPlans = [
+  {
+    name: "Fall Leaf Cleanup",
+    unit: "front + back yard",
+    badge: "In season now",
+    desc: "We do the raking so you don't have to.",
+    href: "/services/leaf-cleanup",
+    cta: "Book a Leaf Cleanup",
+    trackingLabel: "Pricing Leaf Call",
+    inclusions: [
+      "Leaves blown out of beds, corners, and fence lines",
+      "Front and back lawn raked clean",
+      "Every leaf raked up and bagged",
+      "Walkways and driveway blown off before we leave",
+    ],
+  },
+  {
+    name: "Lawn Mowing & Edging",
+    unit: "front + back yard",
+    badge: "Edging included",
+    desc: "Everything you need for a consistently sharp lawn.",
+    href: "/services/lawn-mowing",
+    cta: "Book a Mow",
+    trackingLabel: "Pricing Mow Call",
+    inclusions: [
+      "Full front and backyard mow",
+      "Edging along sidewalks and driveways",
+      "Grass clippings cleared from walkways and driveways",
+      "Weekly, every-other-week, or one-time visits",
+    ],
+  },
 ];
 
 const faqItems = [
@@ -104,7 +140,7 @@ const faqItems = [
   {
     question: "How do I request service?",
     answer:
-      "You can call (216) 889-7822 or email hello@lattenlawncare.com for scheduling and quotes.",
+      "Call or text (216) 889-7822, use the free quote form on this page, or email hello@lattenlawncare.com. Quotes are always free.",
   },
 ];
 
@@ -122,6 +158,14 @@ export default function Home() {
           priceCurrency: "USD",
           itemOffered: { "@type": "Service", name: service.name },
         })),
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${business.url}/#website`,
+        url: business.url,
+        name: business.name,
+        publisher: { "@id": `${business.url}/#business` },
+        inLanguage: "en-US",
       },
       {
         "@type": "FAQPage",
@@ -160,6 +204,30 @@ export default function Home() {
                   runaround.
                 </p>
 
+                <div className="hero__cta-group">
+                  <TrackedLink
+                    className="btn btn--primary btn--lg"
+                    href={business.phoneHref}
+                    trackingEvent="conversion_call_click"
+                    trackingLabel="Hero Call"
+                  >
+                    <IconPhone />
+                    Call (216) 889-7822
+                  </TrackedLink>
+                  <TrackedLink
+                    className="btn btn--ghost btn--lg"
+                    href={smsLink(defaultTextMessage)}
+                    trackingEvent="conversion_text_click"
+                    trackingLabel="Hero Text"
+                  >
+                    <IconChat />
+                    Text for a Quote
+                  </TrackedLink>
+                </div>
+                <p className="hero__note">
+                  Leaf cleanup is <strong>$40</strong> for the front and back yard, blown, raked, and bagged.{" "}
+                  <Link href="#quote">Or send the 30-second quote form.</Link>
+                </p>
                 <div className="hero__badges">
                   {trustBadges.map((badge) => (
                     <span className="chip" key={badge.label}>
@@ -169,29 +237,6 @@ export default function Home() {
                   ))}
                 </div>
 
-                <div className="hero__cta-group">
-                  <TrackedLink
-                    className="btn btn--primary"
-                    href="tel:+12168897822"
-                    trackingEvent="conversion_call_click"
-                    trackingLabel="Hero Call"
-                  >
-                    <IconPhone />
-                    Call (216) 889-7822
-                  </TrackedLink>
-                  <TrackedLink
-                    className="btn btn--ghost"
-                    href="mailto:hello@lattenlawncare.com"
-                    trackingEvent="conversion_email_click"
-                    trackingLabel="Hero Email"
-                  >
-                    <IconMail />
-                    Email for a Quote
-                  </TrackedLink>
-                </div>
-                <p className="hero__note">
-                  Leaf cleanup is <strong>$40</strong> for the front and back yard, blown, raked, and bagged.
-                </p>
               </div>
 
               <figure className="hero__photo-wrap">
@@ -222,14 +267,14 @@ export default function Home() {
 
         <main id="main-content">
           <section className="section section--flush reveal reveal--delay-1">
-            <div className="trust-strip">
-              {trustBadges.map((badge) => (
-                <span className="chip" key={`strip-${badge.label}`}>
-                  <badge.icon />
-                  {badge.label}
-                </span>
+            <ul className="fact-strip" aria-label="At a glance">
+              {quickFacts.map((fact) => (
+                <li className="fact-strip__item" key={fact.value}>
+                  <strong>{fact.value}</strong>
+                  <span>{fact.label}</span>
+                </li>
               ))}
-            </div>
+            </ul>
           </section>
 
           <section className="section section--highlight reveal reveal--delay-1" id="leaf-cleanup">
@@ -253,7 +298,7 @@ export default function Home() {
             <div className="hero__cta-group">
               <TrackedLink
                 className="btn btn--primary"
-                href="tel:+12168897822"
+                href={business.phoneHref}
                 trackingEvent="conversion_call_click"
                 trackingLabel="Leaf Cleanup Call"
               >
@@ -289,7 +334,7 @@ export default function Home() {
           <section className="section section--highlight reveal reveal--delay-2" id="process">
             <div className="section__heading section__heading--center">
               <p className="eyebrow">How It Works</p>
-              <h2>Booking your first cut takes minutes</h2>
+              <h2>Getting on the schedule takes minutes</h2>
             </div>
             <div className="process-grid">
               {processSteps.map((step, index) => (
@@ -303,71 +348,71 @@ export default function Home() {
           </section>
 
           <section className="section reveal reveal--delay-2" id="pricing">
-            <div className="pricing">
-              <div>
-                <p className="eyebrow">Fair Pricing</p>
-                <h2>Straightforward pricing, no surprises</h2>
-                <p className="hero__lead">
-                  Our signature cut is designed for homeowners who want
-                  dependable service without overpaying. Ideal for small to
-                  medium sized properties in Lorain County.
-                </p>
-                <p className="section__linkline">
-                  Larger lot or need extra detail work? <Link href="/#contact">Reach out for a custom quote.</Link>
-                </p>
-              </div>
-              <div className="pricing-card">
-                <span className="pricing-card__badge">Most Popular</span>
-                <div className="pricing-card__price">
-                  <strong>$40</strong>
-                  <span>front + backyard cut</span>
+            <div className="section__heading section__heading--center">
+              <p className="eyebrow">Fair Pricing</p>
+              <h2>Straightforward pricing, no surprises</h2>
+              <p>
+                Flat rates for small to medium properties in Lorain County.
+                Larger lot or need extra detail work?{" "}
+                <Link href="#quote">Ask for a free custom quote.</Link>
+              </p>
+            </div>
+            <div className="pricing-grid">
+              {pricingPlans.map((plan) => (
+                <div className="pricing-card" key={plan.name}>
+                  <span className="pricing-card__badge">{plan.badge}</span>
+                  <h3 className="pricing-card__name">
+                    <Link href={plan.href}>{plan.name}</Link>
+                  </h3>
+                  <div className="pricing-card__price">
+                    <strong>$40</strong>
+                    <span>{plan.unit}</span>
+                  </div>
+                  <p className="pricing-card__desc">{plan.desc}</p>
+                  <ul className="checklist">
+                    {plan.inclusions.map((item) => (
+                      <li key={item}>
+                        <IconCheck />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <TrackedLink
+                    className="btn btn--primary btn--block"
+                    href={business.phoneHref}
+                    trackingEvent="conversion_call_click"
+                    trackingLabel={plan.trackingLabel}
+                  >
+                    <IconPhone />
+                    {plan.cta}
+                  </TrackedLink>
                 </div>
-                <p className="pricing-card__desc">Everything you need for a consistently sharp lawn.</p>
-                <ul className="checklist">
-                  {pricingInclusions.map((item) => (
-                    <li key={item}>
-                      <IconCheck />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <TrackedLink
-                  className="btn btn--primary btn--block"
-                  href="tel:+12168897822"
-                  trackingEvent="conversion_call_click"
-                  trackingLabel="Pricing Call"
-                >
-                  <IconPhone />
-                  Book This Cut
-                </TrackedLink>
-              </div>
+              ))}
             </div>
           </section>
 
           <section className="section section--highlight reveal reveal--delay-2" id="results">
             <div className="section__heading section__heading--center">
-              <p className="eyebrow">Real Results</p>
-              <h2>See the Latten Lawncare difference</h2>
+              <p className="eyebrow">The Difference</p>
+              <h2>What a Latten Lawncare visit looks like</h2>
             </div>
             <div className="compare">
               <figure className="compare-panel">
                 <span className="compare-panel__tag">Before</span>
                 <Image
                   src="/lawn-before.svg"
-                  alt="An overgrown, patchy lawn before service"
+                  alt="Illustration of an overgrown, patchy lawn before service"
                   width={1200}
                   height={800}
-                  loading="eager"
                 />
               </figure>
               <figure className="compare-panel compare-panel--after">
                 <span className="compare-panel__tag">After</span>
                 <Image
                   src="/lawn-after.svg"
-                  alt="A freshly mowed and edged lawn after service"
+                  alt="Illustration of a freshly mowed and edged lawn after service"
                   width={1200}
                   height={800}
-                  loading="eager"
                 />
               </figure>
             </div>
@@ -436,32 +481,37 @@ export default function Home() {
           </section>
 
           <section className="section section--dark reveal reveal--delay-3" id="contact">
-            <div className="contact-box">
-              <p className="eyebrow">Let&apos;s Get Your Lawn Looking Great</p>
-              <h2>Request service today</h2>
-              <p className="contact-box__lead">
-                Call or email Latten Lawncare for quick scheduling and a
-                welcoming, no-hassle experience.
-              </p>
-              <div className="contact-box__links">
-                <TrackedLink
-                  className="btn btn--accent"
-                  href="tel:+12168897822"
-                  trackingEvent="conversion_call_click"
-                  trackingLabel="Footer Call"
-                >
-                  <IconPhone />
-                  (216) 889-7822
-                </TrackedLink>
-                <TrackedLink
-                  className="btn btn--outline"
-                  href="mailto:hello@lattenlawncare.com"
-                  trackingEvent="conversion_email_click"
-                  trackingLabel="Footer Email"
-                >
-                  <IconMail />
-                  hello@lattenlawncare.com
-                </TrackedLink>
+            <div className="contact-split">
+              <div className="contact-box contact-box--left">
+                <p className="eyebrow">Free, No-Obligation Quotes</p>
+                <h2 id="quote-heading">Get your free quote</h2>
+                <p className="contact-box__lead">
+                  Tell James where you are and what you need. You&apos;ll hear back
+                  quickly with a price and the next open day.
+                </p>
+                <div className="contact-box__links">
+                  <TrackedLink
+                    className="btn btn--accent"
+                    href={business.phoneHref}
+                    trackingEvent="conversion_call_click"
+                    trackingLabel="Contact Call"
+                  >
+                    <IconPhone />
+                    Call (216) 889-7822
+                  </TrackedLink>
+                  <TrackedLink
+                    className="btn btn--outline"
+                    href={`mailto:${business.email}`}
+                    trackingEvent="conversion_email_click"
+                    trackingLabel="Contact Email"
+                  >
+                    <IconMail />
+                    hello@lattenlawncare.com
+                  </TrackedLink>
+                </div>
+              </div>
+              <div id="quote" className="contact-split__form">
+                <QuoteForm />
               </div>
             </div>
           </section>

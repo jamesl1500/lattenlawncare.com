@@ -1,6 +1,7 @@
 import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
-import { IconMail, IconMapPin, IconPhone } from "@/components/icons";
+import { IconChat, IconMail, IconMapPin, IconPhone } from "@/components/icons";
+import { business, defaultTextMessage, smsLink } from "@/lib/business";
 import { locations } from "@/lib/locations";
 
 export default function SiteFooter() {
@@ -21,7 +22,7 @@ export default function SiteFooter() {
         </div>
 
         <div className="footer__col">
-          <h4>Quick Links</h4>
+          <h2 className="footer__heading">Quick Links</h2>
           <ul>
             <li>
               <Link href="/services">Services</Link>
@@ -39,7 +40,7 @@ export default function SiteFooter() {
         </div>
 
         <div className="footer__col">
-          <h4>Service Areas</h4>
+          <h2 className="footer__heading">Service Areas</h2>
           <ul>
             {featuredLocations.map((location) => (
               <li key={location.slug}>
@@ -53,11 +54,16 @@ export default function SiteFooter() {
         </div>
 
         <div className="footer__col">
-          <h4>Contact</h4>
+          <h2 className="footer__heading">Contact</h2>
           <ul>
             <li className="footer__contact-item">
               <a href="tel:+12168897822">
                 <IconPhone /> (216) 889-7822
+              </a>
+            </li>
+            <li className="footer__contact-item">
+              <a href={smsLink(defaultTextMessage)}>
+                <IconChat /> Text {business.phoneDisplay}
               </a>
             </li>
             <li className="footer__contact-item">
