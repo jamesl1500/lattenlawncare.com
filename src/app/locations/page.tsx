@@ -4,16 +4,15 @@ import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import MobileCallBar from "@/components/MobileCallBar";
 import { IconMapPin } from "@/components/icons";
+import { pageMetadata } from "@/lib/business";
 import { locations } from "@/lib/locations";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Lorain County Service Areas | Latten Lawncare",
   description:
-    "Lawn mowing, edging, and leaf cleanup in Elyria, Lorain, Avon, North Ridgeville, Amherst, Avon Lake, Sheffield Lake, and Sheffield Village. $40 for small to medium lawns.",
-  alternates: {
-    canonical: "/locations",
-  },
-};
+    "Leaf cleanup, Leaf & Mow, and lawn mowing in Elyria, Lorain, Avon, North Ridgeville, Amherst, Avon Lake, Sheffield Lake, and Sheffield Village. Small to medium lawns from $40.",
+  path: "/locations",
+});
 
 export default function LocationsPage() {
   return (

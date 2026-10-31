@@ -4,9 +4,19 @@ import { notFound } from "next/navigation";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import MobileCallBar from "@/components/MobileCallBar";
-import { IconCheck, IconMail, IconPhone } from "@/components/icons";
-import { areaServed, breadcrumbJsonLd, business, businessId } from "@/lib/business";
-import { locations, siteBaseUrl } from "@/lib/locations";
+import JsonLd from "@/components/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import BeforeAfterGallery from "@/components/BeforeAfterGallery";
+import { IconCheck, IconLeaf, IconMail, IconPhone } from "@/components/icons";
+import {
+  areaServed,
+  breadcrumbJsonLd,
+  business,
+  businessId,
+  pageMetadata,
+} from "@/lib/business";
+import { projectsForService } from "@/lib/gallery";
+import { locations } from "@/lib/locations";
 import { getService, services } from "@/lib/services";
 
 type Props = {
@@ -22,22 +32,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = getService(slug);
 
   if (!service) {
-    return { title: "Service Not Found | Latten Lawncare" };
+    return { title: "Service Not Found | Latten Lawncare", robots: { index: false } };
   }
 
-  return {
+  return pageMetadata({
     title: service.metaTitle,
     description: service.metaDescription,
     keywords: service.keywords,
-    alternates: {
-      canonical: `/services/${service.slug}`,
-    },
-    openGraph: {
-      title: service.metaTitle,
-      description: service.metaDescription,
-      url: `${siteBaseUrl}/services/${service.slug}`,
-    },
-  };
+    path: `/services/${service.slug}`,
+  });
 }
 
 export default async function ServiceDetailPage({ params }: Props) {
@@ -47,6 +50,14 @@ export default async function ServiceDetailPage({ params }: Props) {
   if (!service) {
     notFound();
   }
+
+  const breadcrumbs = [
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services" },
+    { name: service.name, path: `/services/${service.slug}` },
+  ];
+  const gallery = projectsForService(service.slug);
+  const related = (service.related ?? []).map((slug) => getService(slug)!);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -74,31 +85,28 @@ export default async function ServiceDetailPage({ params }: Props) {
           acceptedAnswer: { "@type": "Answer", text: faq.answer },
         })),
       },
-      breadcrumbJsonLd([
-        { name: "Home", path: "/" },
-        { name: "Services", path: "/services" },
-        { name: service.name, path: `/services/${service.slug}` },
-      ]),
+      breadcrumbJsonLd(breadcrumbs),
     ],
   };
 
   return (
     <div className="site-shell">
       <SiteHeader />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <main id="main-content">
-        <section className="section reveal">
+        <section className={`section reveal${service.badge ? " section--leaf" : ""}`}>
+          <Breadcrumbs items={breadcrumbs} />
           <p className="eyebrow">Lorain County {service.shortName}</p>
           <h1>{service.name} in Lorain County, OH</h1>
           <p className="hero__lead">{service.intro}</p>
           <div className="hero__cta-group">
             <a className="btn btn--primary" href={business.phoneHref}>
               <IconPhone />
-              Call {business.phoneDisplay}
+              {`Call ${business.phoneDisplay}`}
             </a>
-            <a className="btn btn--ghost" href={`mailto:${business.email}`}>
+            <a className="btn btn--ghost" href={business.emailHref}>
               <IconMail />
-              Email {business.email}
+              {`Email ${business.email}`}
             </a>
           </div>
         </section>
@@ -117,7 +125,13 @@ export default async function ServiceDetailPage({ params }: Props) {
               </ul>
               <p>{service.bestFor}</p>
             </div>
-            <div className="pricing-card">
+            <div className={`pricing-card${service.badge ? " pricing-card--leaf" : ""}`}>
+              {service.badge ? (
+                <span className="pricing-card__badge">
+                  <IconLeaf />
+                  {service.badge}
+                </span>
+              ) : null}
               <div className="pricing-card__price">
                 <strong>${service.price}</strong>
                 <span>{service.priceNote}</span>
@@ -153,6 +167,20 @@ export default async function ServiceDetailPage({ params }: Props) {
           </section>
         )}
 
+        {gallery.length > 0 && (
+          <section className="section section--highlight reveal reveal--delay-2">
+            <div className="section__heading section__heading--center">
+              <p className="eyebrow">Before &amp; After</p>
+              <h2>{service.shortName} results</h2>
+              <p>Drag the slider to compare the yard before and after.</p>
+            </div>
+            <BeforeAfterGallery projects={gallery} />
+            <p className="section__linkline section__linkline--center">
+              <Link href="/before-and-after">See all before and after photos</Link>
+            </p>
+          </section>
+        )}
+
         <section className="section reveal reveal--delay-2">
           <div className="section__heading">
             <p className="eyebrow">Frequently Asked Questions</p>
@@ -167,6 +195,29 @@ export default async function ServiceDetailPage({ params }: Props) {
             ))}
           </div>
         </section>
+
+        {related.length > 0 && (
+          <section className="section reveal reveal--delay-2">
+            <div className="section__heading">
+              <p className="eyebrow">Related Services</p>
+              <h2>Other ways we can help</h2>
+            </div>
+            <div className="related-grid">
+              {related.map((item) => (
+                <article className="card card--interactive" key={item.slug}>
+                  {item.badge ? <p className="related-card__badge">{item.badge}</p> : null}
+                  <h3>
+                    <Link href={`/services/${item.slug}`}>{item.name}</Link>
+                  </h3>
+                  <p>
+                    <strong>${item.price}</strong> {item.priceNote}
+                  </p>
+                  <p>{item.summary}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
 
         <section className="section reveal reveal--delay-2">
           <h2>{service.shortName} near you</h2>

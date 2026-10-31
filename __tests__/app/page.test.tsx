@@ -25,6 +25,34 @@ describe("Home page", () => {
     expect(screen.queryByText(/weed control/i)).not.toBeInTheDocument();
   });
 
+  it("features the $90 Leaf & Mow fall special", () => {
+    render(<Home />);
+
+    expect(document.getElementById("leaf-and-mow")).not.toBeNull();
+    expect(screen.getAllByText("$90").length).toBeGreaterThan(0);
+    expect(screen.getByRole("heading", { name: "Leaf & Mow" })).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /book leaf & mow for \$90/i }).length).toBeGreaterThan(0);
+  });
+
+  it("prices all three services in the pricing section", () => {
+    render(<Home />);
+
+    const pricing = document.getElementById("pricing")!;
+    for (const name of ["Leaf Cleanup & Mow", "Fall Leaf Cleanup", "Lawn Mowing & Edging"]) {
+      expect(pricing).toHaveTextContent(name);
+    }
+  });
+
+  it("shows before and after sliders with a link to the full gallery", () => {
+    render(<Home />);
+
+    expect(screen.getAllByRole("slider").length).toBeGreaterThan(0);
+    expect(screen.getByRole("link", { name: /view all before and after photos/i })).toHaveAttribute(
+      "href",
+      "/before-and-after",
+    );
+  });
+
   it("shows the $40 starting price", () => {
     render(<Home />);
 
@@ -70,6 +98,18 @@ describe("Home page", () => {
 
     expect(types).toContain("LocalBusiness");
     expect(types).toContain("FAQPage");
+  });
+
+  it("only marks up FAQ questions that are visible on the page", () => {
+    const { container } = render(<Home />);
+
+    const script = container.querySelector('script[type="application/ld+json"]');
+    const data = JSON.parse(script?.innerHTML ?? "{}");
+    const faq = data["@graph"].find((node: { "@type": string }) => node["@type"] === "FAQPage");
+
+    for (const question of faq.mainEntity) {
+      expect(screen.getByText(question.name)).toBeInTheDocument();
+    }
   });
 
   it("features fall leaf cleanup: blow, rake, and bag", () => {

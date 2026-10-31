@@ -15,8 +15,8 @@ export default function SiteFooter() {
             <BrandLogo onDark className="footer__logo" />
           </span>
           <p className="footer__tagline">
-            Locally owned, fully insured lawn care for small to medium sized
-            yards across Lorain County, Ohio.
+            Locally owned, fully insured fall leaf cleanup and lawn care for
+            small to medium sized yards across Lorain County, Ohio.
           </p>
         </div>
 
@@ -25,6 +25,12 @@ export default function SiteFooter() {
           <ul>
             <li>
               <Link href="/services">Services</Link>
+            </li>
+            <li>
+              <Link href="/services/leaf-and-mow">Leaf &amp; Mow Special</Link>
+            </li>
+            <li>
+              <Link href="/before-and-after">Before &amp; After Photos</Link>
             </li>
             <li>
               <Link href="/#pricing">Pricing</Link>

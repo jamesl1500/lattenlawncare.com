@@ -61,7 +61,7 @@ export default async function OpenGraphImage() {
           }}
         >
           <span>(216) 889-7822</span>
-          <span>Leaf Cleanup $40</span>
+          <span>Leaf Cleanup $40 &middot; Leaf &amp; Mow $90</span>
         </div>
       </div>
     ),
