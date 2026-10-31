@@ -134,13 +134,13 @@ export const services: ServiceInfo[] = [
     slug: "leaf-and-mow",
     name: "Leaf Cleanup & Mow",
     shortName: "Leaf & Mow",
-    price: 90,
+    price: 70,
     priceNote: "full leaf cleanup + mow and edge, one visit",
     badge: "Fall Special",
     summary:
       "The complete fall visit: we blow, rake, and bag every leaf, then mow and edge the lawn so your yard is finished for winter.",
     intro:
-      "Leaf & Mow is our complete fall visit. We do the full leaf cleanup first, blowing leaves out of beds and corners, raking the lawn clean, and bagging every leaf. Then we mow and edge the front and back yard in the same trip, so the grass goes into winter short, even, and clear. It is $90 for a small to medium lawn.",
+      "Leaf & Mow is our complete fall visit. We do the full leaf cleanup first, blowing leaves out of beds and corners, raking the lawn clean, and bagging every leaf. Then we mow and edge the front and back yard in the same trip, so the grass goes into winter short, even, and clear. It is $70 for a small to medium lawn.",
     includes: [
       "Full fall leaf cleanup: leaves blown, raked, and bagged",
       "Bags set out, ready for yard waste pickup",
@@ -151,9 +151,9 @@ export const services: ServiceInfo[] = [
     ],
     bestFor:
       "Homeowners who want the whole yard done before winter, leaves gone and grass cut, in a single appointment.",
-    metaTitle: "Leaf Cleanup & Mow in Lorain County, OH | $90 Fall Special",
+    metaTitle: "Leaf Cleanup & Mow in Lorain County, OH | $70 Fall Special",
     metaDescription:
-      "Leaf & Mow for $90: we blow, rake, and bag your leaves, then mow and edge your lawn in the same visit. Small to medium lawns across Lorain County. Call (216) 889-7822.",
+      "Leaf & Mow for $70: we blow, rake, and bag your leaves, then mow and edge your lawn in the same visit. Small to medium lawns across Lorain County. Call (216) 889-7822.",
     keywords: [
       "leaf cleanup and mowing",
       "fall cleanup",
@@ -183,12 +183,12 @@ export const services: ServiceInfo[] = [
       {
         question: "How much is Leaf & Mow?",
         answer:
-          "Leaf & Mow is $90 for the front and back yard of a small to medium lawn. Larger yards or very heavy leaf cover get a free custom quote.",
+          "Leaf & Mow is $70 for the front and back yard of a small to medium lawn. Larger yards or very heavy leaf cover get a free custom quote.",
       },
       {
         question: "What is the difference between leaf cleanup and Leaf & Mow?",
         answer:
-          "Leaf cleanup ($40) clears and bags the leaves. Leaf & Mow ($90) includes that full leaf cleanup and then mows and edges the lawn in the same visit, so your whole yard is finished for winter in one appointment.",
+          "Leaf cleanup ($40) clears and bags the leaves. Leaf & Mow ($70) includes that full leaf cleanup and then mows and edges the lawn in the same visit, so your whole yard is finished for winter in one appointment.",
       },
       {
         question: "Why mow after the leaves are cleared?",

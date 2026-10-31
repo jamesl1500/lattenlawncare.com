@@ -13,7 +13,7 @@ export const business = {
   url: siteBaseUrl,
   logo: `${siteBaseUrl}/brand/logo-mark.png`,
   image: `${siteBaseUrl}/opengraph-image`,
-  priceRange: "$40-$90",
+  priceRange: "$40-$70",
 } as const;
 
 /** Stable id so other JSON-LD nodes (services, pages) can point at the business. */

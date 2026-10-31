@@ -12,10 +12,10 @@ function readJsonLd(container: HTMLElement) {
 }
 
 describe("Leaf & Mow service", () => {
-  it("is priced at $90 and badged as the fall special", () => {
+  it("is priced at $70 and badged as the fall special", () => {
     const leafAndMow = getService("leaf-and-mow");
 
-    expect(leafAndMow?.price).toBe(90);
+    expect(leafAndMow?.price).toBe(70);
     expect(leafAndMow?.badge).toBe("Fall Special");
   });
 
@@ -32,7 +32,7 @@ describe("Leaf & Mow service", () => {
     render(await ServiceDetailPage(props));
 
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Leaf Cleanup & Mow");
-    expect(screen.getAllByText("$90").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("$70").length).toBeGreaterThan(0);
     expect(screen.getAllByRole("slider").length).toBeGreaterThan(0);
     expect(screen.getByRole("link", { name: "Fall Leaf Cleanup" })).toHaveAttribute(
       "href",
@@ -40,19 +40,19 @@ describe("Leaf & Mow service", () => {
     );
   });
 
-  it("offers $90 in its Service schema", async () => {
+  it("offers $70 in its Service schema", async () => {
     const { container } = render(await ServiceDetailPage(props));
     const service = readJsonLd(container)["@graph"].find(
       (node: { "@type": string }) => node["@type"] === "Service",
     );
 
-    expect(service.offers.price).toBe("90");
+    expect(service.offers.price).toBe("70");
   });
 
   it("targets fall cleanup searches with a full metadata set", async () => {
     const metadata = await generateMetadata(props);
 
-    expect(metadata.title).toMatch(/\$90/);
+    expect(metadata.title).toMatch(/\$70/);
     expect(metadata.alternates?.canonical).toBe("/services/leaf-and-mow");
     expect(metadata.openGraph?.images).toBeDefined();
   });

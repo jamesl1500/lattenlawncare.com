@@ -11,7 +11,7 @@ describe("Location detail page", () => {
     render(await LocationDetailPage(props));
 
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(location.city);
-    expect(screen.getByRole("link", { name: /leaf & mow \$90/i })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /leaf & mow \$70/i })).toHaveAttribute(
       "href",
       "/services/leaf-and-mow",
     );

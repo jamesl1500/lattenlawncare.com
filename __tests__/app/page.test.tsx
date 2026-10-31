@@ -25,13 +25,13 @@ describe("Home page", () => {
     expect(screen.queryByText(/weed control/i)).not.toBeInTheDocument();
   });
 
-  it("features the $90 Leaf & Mow fall special", () => {
+  it("features the $70 Leaf & Mow fall special", () => {
     render(<Home />);
 
     expect(document.getElementById("leaf-and-mow")).not.toBeNull();
-    expect(screen.getAllByText("$90").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("$70").length).toBeGreaterThan(0);
     expect(screen.getByRole("heading", { name: "Leaf & Mow" })).toBeInTheDocument();
-    expect(screen.getAllByRole("link", { name: /book leaf & mow for \$90/i }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("link", { name: /book leaf & mow for \$70/i }).length).toBeGreaterThan(0);
   });
 
   it("prices all three services in the pricing section", () => {

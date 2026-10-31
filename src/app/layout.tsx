@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.lattenlawncare.com"),
   title: "Fall Leaf Cleanup in Lorain County, OH | We Blow, Rake & Bag | Latten Lawncare",
   description:
-    "Fall leaf cleanup in Lorain County, OH: we blow, rake, and bag your leaves for $40, or add a mow and edge with Leaf & Mow for $90. Call (216) 889-7822.",
+    "Fall leaf cleanup in Lorain County, OH: we blow, rake, and bag your leaves for $40, or add a mow and edge with Leaf & Mow for $70. Call (216) 889-7822.",
   // No canonical or og:url here: they would be inherited by every page that
   // forgets to set its own (e.g. the 404 page). Pages set them via pageMetadata.
   openGraph: {

@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return pageMetadata({
     title: `Leaf Cleanup & Lawn Mowing in ${location.city}, OH | $40 | Latten Lawncare`,
-    description: `Fall leaf cleanup in ${location.city}: we blow, rake, and bag your leaves for $40, or add a mow and edge with Leaf & Mow for $90. ${location.summary} Call (216) 889-7822.`,
+    description: `Fall leaf cleanup in ${location.city}: we blow, rake, and bag your leaves for $40, or add a mow and edge with Leaf & Mow for $70. ${location.summary} Call (216) 889-7822.`,
     path: `/locations/${location.slug}`,
   });
 }

@@ -28,7 +28,7 @@ import { getService, services as serviceOffers } from "@/lib/services";
 export const metadata: Metadata = pageMetadata({
   title: "Fall Leaf Cleanup in Lorain County, OH | We Blow, Rake & Bag | Latten Lawncare",
   description:
-    "Fall leaf cleanup in Lorain County, OH: we blow, rake, and bag your leaves for $40, or get leaves cleared plus a mow and edge with Leaf & Mow for $90. Call (216) 889-7822.",
+    "Fall leaf cleanup in Lorain County, OH: we blow, rake, and bag your leaves for $40, or get leaves cleared plus a mow and edge with Leaf & Mow for $70. Call (216) 889-7822.",
   path: "/",
   keywords: [
     "leaf cleanup Lorain County",
@@ -76,7 +76,7 @@ const services = [
     title: "Leaf & Mow",
     href: "/services/leaf-and-mow",
     description:
-      "The complete fall visit: full leaf cleanup, then a mow and edge in the same trip. $90 for small to medium lawns.",
+      "The complete fall visit: full leaf cleanup, then a mow and edge in the same trip. $70 for small to medium lawns.",
   },
   {
     icon: IconMower,
@@ -128,7 +128,7 @@ const faqItems = [
   {
     question: "What is Leaf & Mow?",
     answer:
-      "Leaf & Mow is our $90 complete fall visit for small to medium lawns. We blow, rake, and bag all the leaves, then mow and edge the front and back yard in the same trip.",
+      "Leaf & Mow is our $70 complete fall visit for small to medium lawns. We blow, rake, and bag all the leaves, then mow and edge the front and back yard in the same trip.",
   },
   {
     question: "Do you bag the leaves?",
@@ -227,7 +227,7 @@ export default function Home() {
                 </div>
                 <p className="hero__note">
                   Leaf cleanup is <strong>$40</strong> for the front and back yard, blown, raked, and bagged.
-                  Want it mowed too? <Link href="/services/leaf-and-mow">Leaf &amp; Mow is <strong>$90</strong></Link>.
+                  Want it mowed too? <Link href="/services/leaf-and-mow">Leaf &amp; Mow is <strong>$70</strong></Link>.
                 </p>
               </div>
 

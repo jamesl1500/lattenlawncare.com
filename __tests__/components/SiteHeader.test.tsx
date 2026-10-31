@@ -21,12 +21,12 @@ describe("SiteHeader", () => {
     );
   });
 
-  it("promotes fall leaf cleanup and the $90 Leaf & Mow", () => {
+  it("promotes fall leaf cleanup and the $70 Leaf & Mow", () => {
     render(<SiteHeader />);
 
     const promo = screen.getByRole("region", { name: "Seasonal offer" });
     expect(promo).toHaveTextContent("Leaf cleanup $40");
-    expect(promo).toHaveTextContent("Leaf & Mow $90");
+    expect(promo).toHaveTextContent("Leaf & Mow $70");
     expect(within(promo).getByRole("link", { name: "See details" })).toHaveAttribute(
       "href",
       "/services/leaf-and-mow",

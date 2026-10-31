@@ -12,7 +12,7 @@ import { siteBaseUrl } from "@/lib/locations";
 export const metadata: Metadata = pageMetadata({
   title: "Lawn Care Services & Pricing | Latten Lawncare",
   description:
-    "Fall leaf cleanup (we blow, rake, and bag) and lawn mowing with edging, $40 each, or both in one visit with Leaf & Mow for $90. Small to medium lawns in Lorain County, OH. Call (216) 889-7822.",
+    "Fall leaf cleanup (we blow, rake, and bag) and lawn mowing with edging, $40 each, or both in one visit with Leaf & Mow for $70. Small to medium lawns in Lorain County, OH. Call (216) 889-7822.",
   path: "/services",
 });
 
@@ -58,7 +58,7 @@ export default function ServicesPage() {
           <h1>Lawn care services in Lorain County</h1>
           <p className="hero__lead">
             Simple services with flat prices for the front and back yard of a small to medium lawn:
-            leaf cleanup or mowing for $40 each, or both in one visit with Leaf &amp; Mow for $90.
+            leaf cleanup or mowing for $40 each, or both in one visit with Leaf &amp; Mow for $70.
             Bigger yard? Call for a free quote.
           </p>
         </section>
