@@ -31,8 +31,4 @@
     <rect x="150" y="640" width="60" height="60" rx="8" fill="#1f6f44" opacity="0.15"/>
     <circle cx="1040" cy="470" r="34" fill="#ffffff" opacity="0.18"/>
   </g>
-  <g transform="translate(64 64)">
-    <rect width="130" height="44" rx="22" fill="#0d3a23"/>
-    <text x="65" y="29" text-anchor="middle" fill="#eafaee" font-family="Arial, sans-serif" font-size="20" font-weight="700">AFTER</text>
-  </g>
 </svg>

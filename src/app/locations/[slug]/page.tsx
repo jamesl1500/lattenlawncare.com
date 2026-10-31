@@ -4,10 +4,38 @@ import { notFound } from "next/navigation";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import MobileCallBar from "@/components/MobileCallBar";
+import JsonLd from "@/components/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { IconCheck, IconMail, IconPhone } from "@/components/icons";
-import { breadcrumbJsonLd, businessId } from "@/lib/business";
+import { breadcrumbJsonLd, businessId, pageMetadata } from "@/lib/business";
 import { locations, siteBaseUrl } from "@/lib/locations";
-import { services } from "@/lib/services";
+import { getService, services } from "@/lib/services";
+
+const leafCleanup = getService("leaf-cleanup")!;
+const leafAndMow = getService("leaf-and-mow")!;
+const lawnMowing = getService("lawn-mowing")!;
+
+function faqForCity(city: string) {
+  return [
+    {
+      question: `What lawn services are available in ${city}?`,
+      answer:
+        "Fall leaf cleanup (we blow, rake, and bag your leaves), lawn mowing with edging included, and Leaf & Mow, which does both in one visit, for small to medium sized lawns.",
+    },
+    {
+      question: `How much does leaf cleanup cost in ${city}?`,
+      answer: `Leaf cleanup is $${leafCleanup.price} for the front and back yard of a small to medium lawn, including blowing, raking, and bagging the leaves.`,
+    },
+    {
+      question: `Can you clean up the leaves and mow in the same visit in ${city}?`,
+      answer: `Yes. Leaf & Mow is $${leafAndMow.price}: we do the full leaf cleanup, then mow and edge the front and back yard in the same trip.`,
+    },
+    {
+      question: `How much does mowing cost in ${city}?`,
+      answer: `Front and backyard mowing starts at $${lawnMowing.price}, and edging is included.`,
+    },
+  ];
+}
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -27,21 +55,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const title = `Leaf Cleanup & Lawn Mowing in ${location.city}, OH | $40 | Latten Lawncare`;
-  const description = `Fall leaf cleanup in ${location.city}: we blow, rake, and bag your leaves for $40. ${location.summary} Call (216) 889-7822.`;
-
-  return {
-    title,
-    description,
-    alternates: {
-      canonical: `/locations/${location.slug}`,
-    },
-    openGraph: {
-      title,
-      description,
-      url: `${siteBaseUrl}/locations/${location.slug}`,
-    },
-  };
+  return pageMetadata({
+    title: `Leaf Cleanup & Lawn Mowing in ${location.city}, OH | $40 | Latten Lawncare`,
+    description: `Fall leaf cleanup in ${location.city}: we blow, rake, and bag your leaves for $40, or add a mow and edge with Leaf & Mow for $70. ${location.summary} Call (216) 889-7822.`,
+    path: `/locations/${location.slug}`,
+  });
 }
 
 export default async function LocationDetailPage({ params }: Props) {
@@ -54,6 +72,12 @@ export default async function LocationDetailPage({ params }: Props) {
 
   const pagePath = `/locations/${location.slug}`;
   const nearby = locations.filter((item) => item.slug !== location.slug);
+  const faqItems = faqForCity(location.city);
+  const breadcrumbs = [
+    { name: "Home", path: "/" },
+    { name: "Locations", path: "/locations" },
+    { name: location.city, path: pagePath },
+  ];
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -70,39 +94,14 @@ export default async function LocationDetailPage({ params }: Props) {
           url: `${siteBaseUrl}/services/${service.slug}`,
         },
       })),
-      breadcrumbJsonLd([
-        { name: "Home", path: "/" },
-        { name: "Locations", path: "/locations" },
-        { name: location.city, path: pagePath },
-      ]),
+      breadcrumbJsonLd(breadcrumbs),
       {
         "@type": "FAQPage",
-        mainEntity: [
-          {
-            "@type": "Question",
-            name: `What lawn services are available in ${location.city}?`,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Fall leaf cleanup (we blow, rake, and bag your leaves) and lawn mowing with edging included, for small to medium sized lawns.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: `How much does mowing cost in ${location.city}?`,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Front and backyard mowing starts at $40, and edging is included.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: `How much does leaf cleanup cost in ${location.city}?`,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Leaf cleanup is $40 for the front and back yard of a small to medium lawn, including blowing, raking, and bagging the leaves.",
-            },
-          },
-        ],
+        mainEntity: faqItems.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: { "@type": "Answer", text: item.answer },
+        })),
       },
     ],
   };
@@ -110,15 +109,20 @@ export default async function LocationDetailPage({ params }: Props) {
   return (
     <div className="site-shell">
       <SiteHeader />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       <main id="main-content">
         <section className="section reveal">
+          <Breadcrumbs items={breadcrumbs} />
           <p className="eyebrow">Local Service Page</p>
           <h1>{location.headline}</h1>
           <p className="hero__lead">{location.summary}</p>
+          <p className="hero__note">
+            Leaf cleanup <strong>${leafCleanup.price}</strong> &middot;{" "}
+            <Link href="/services/leaf-and-mow">
+              Leaf &amp; Mow <strong>${leafAndMow.price}</strong>
+            </Link>{" "}
+            &middot; Mowing <strong>${lawnMowing.price}</strong>
+          </p>
           <div className="hero__cta-group">
             <a className="btn btn--primary" href="tel:+12168897822">
               <IconPhone />
@@ -181,6 +185,21 @@ export default async function LocationDetailPage({ params }: Props) {
                 </p>
                 <p>{service.summary}</p>
               </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section reveal reveal--delay-2" id="faq">
+          <div className="section__heading">
+            <p className="eyebrow">{location.city} FAQ</p>
+            <h2>Questions from {location.city} homeowners</h2>
+          </div>
+          <div className="faq-list">
+            {faqItems.map((item) => (
+              <details key={item.question} className="faq-item">
+                <summary>{item.question}</summary>
+                <p>{item.answer}</p>
+              </details>
             ))}
           </div>
         </section>

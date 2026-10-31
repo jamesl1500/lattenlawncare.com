@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import sitemap from "@/app/sitemap";
 import { locations, siteBaseUrl } from "@/lib/locations";
+import { contentLastUpdated } from "@/lib/business";
 import { services } from "@/lib/services";
 
 describe("sitemap", () => {
@@ -27,6 +28,17 @@ describe("sitemap", () => {
     expect(urls).toContain(`${siteBaseUrl}/services`);
     for (const service of services) {
       expect(urls).toContain(`${siteBaseUrl}/services/${service.slug}`);
+    }
+  });
+
+  it("includes the before and after gallery", () => {
+    const urls = sitemap().map((entry) => entry.url);
+    expect(urls).toContain(`${siteBaseUrl}/before-and-after`);
+  });
+
+  it("reports a stable lastModified instead of the build time", () => {
+    for (const entry of sitemap()) {
+      expect(entry.lastModified).toEqual(contentLastUpdated);
     }
   });
 

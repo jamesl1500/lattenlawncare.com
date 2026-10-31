@@ -1,9 +1,13 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import TrackedLink from "@/components/TrackedLink";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import MobileCallBar from "@/components/MobileCallBar";
+import JsonLd from "@/components/JsonLd";
+import BeforeAfterGallery from "@/components/BeforeAfterGallery";
+import ServicePricingCard from "@/components/ServicePricingCard";
 import {
   IconCalendar,
   IconCheck,
@@ -16,11 +20,41 @@ import {
   IconShield,
   IconSpark,
 } from "@/components/icons";
-import { localBusinessJsonLd } from "@/lib/business";
+import { localBusinessJsonLd, pageMetadata } from "@/lib/business";
+import { galleryProjects } from "@/lib/gallery";
 import { locations } from "@/lib/locations";
 import { getService, services as serviceOffers } from "@/lib/services";
 
+export const metadata: Metadata = pageMetadata({
+  title: "Fall Leaf Cleanup in Lorain County, OH | We Blow, Rake & Bag | Latten Lawncare",
+  description:
+    "Fall leaf cleanup in Lorain County, OH: we blow, rake, and bag your leaves for $40, or get leaves cleared plus a mow and edge with Leaf & Mow for $70. Call (216) 889-7822.",
+  path: "/",
+  keywords: [
+    "leaf cleanup Lorain County",
+    "fall leaf cleanup",
+    "leaf removal near me",
+    "leaf raking service",
+    "leaf blowing service",
+    "leaf bagging",
+    "leaf cleanup and mowing",
+    "fall yard cleanup",
+    "leaf cleanup Elyria",
+    "leaf cleanup Avon",
+    "leaf cleanup North Ridgeville",
+    "leaf cleanup Lorain",
+    "Lorain County lawn care",
+    "lawn mowing Lorain County",
+    "lawn mowing Elyria",
+    "edging service",
+    "affordable lawn mowing",
+    "Latten Lawncare",
+  ],
+});
+
 const leafCleanup = getService("leaf-cleanup")!;
+const leafAndMow = getService("leaf-and-mow")!;
+const pricingOrder = ["leaf-and-mow", "leaf-cleanup", "lawn-mowing"].map((slug) => getService(slug)!);
 
 const trustBadges = [
   { icon: IconShield, label: "Fully Insured" },
@@ -36,6 +70,13 @@ const services = [
     href: "/services/leaf-cleanup",
     description:
       "We blow, rake, and bag the leaves in your front and back yard so your grass can breathe heading into winter. $40 for small to medium lawns.",
+  },
+  {
+    icon: IconLeaf,
+    title: "Leaf & Mow",
+    href: "/services/leaf-and-mow",
+    description:
+      "The complete fall visit: full leaf cleanup, then a mow and edge in the same trip. $70 for small to medium lawns.",
   },
   {
     icon: IconMower,
@@ -64,15 +105,8 @@ const processSteps = [
   },
   {
     title: "Enjoy Your Lawn",
-    description: "Relax while we handle the mowing, edging, and detail work every visit.",
+    description: "Relax while we handle the leaves, mowing, edging, and detail work.",
   },
-];
-
-const pricingInclusions = [
-  "Full front and backyard mow",
-  "Careful attention to detail around edges, beds, and obstacles",
-  "Grass clippings cleared from walkways and driveways",
-  "Consistent local service you can count on, visit after visit",
 ];
 
 const faqItems = [
@@ -90,6 +124,11 @@ const faqItems = [
     question: "How much is leaf cleanup?",
     answer:
       "Leaf cleanup is $40 for the front and back yard of a small to medium lawn. That includes blowing, raking, and bagging all the leaves.",
+  },
+  {
+    question: "What is Leaf & Mow?",
+    answer:
+      "Leaf & Mow is our $70 complete fall visit for small to medium lawns. We blow, rake, and bag all the leaves, then mow and edge the front and back yard in the same trip.",
   },
   {
     question: "Do you bag the leaves?",
@@ -141,10 +180,7 @@ export default function Home() {
     <>
       <div className="site-shell">
         <SiteHeader />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
+        <JsonLd data={structuredData} />
         <header className="hero">
           <div className="hero__overlay" />
           <div className="hero__content reveal">
@@ -191,6 +227,7 @@ export default function Home() {
                 </div>
                 <p className="hero__note">
                   Leaf cleanup is <strong>$40</strong> for the front and back yard, blown, raked, and bagged.
+                  Want it mowed too? <Link href="/services/leaf-and-mow">Leaf &amp; Mow is <strong>$70</strong></Link>.
                 </p>
               </div>
 
@@ -266,12 +303,31 @@ export default function Home() {
             </div>
           </section>
 
+          <section className="section section--leaf reveal reveal--delay-1" id="leaf-and-mow">
+            <div className="pricing">
+              <div>
+                <p className="eyebrow">{leafAndMow.badge}</p>
+                <h2>{`Leaves gone and lawn mowed, one visit, $${leafAndMow.price}`}</h2>
+                <p className="hero__lead">{leafAndMow.summary}</p>
+                <p>{leafAndMow.bestFor}</p>
+                <p className="section__linkline">
+                  <Link href="/services/leaf-and-mow">How Leaf &amp; Mow works</Link>
+                </p>
+              </div>
+              <ServicePricingCard
+                service={leafAndMow}
+                trackingLabel="Homepage Leaf & Mow Call"
+                showDetailsLink={false}
+              />
+            </div>
+          </section>
+
           <section className="section reveal reveal--delay-1" id="services">
             <div className="section__heading">
               <p className="eyebrow">What We Offer</p>
               <h2>Simple, reliable lawn care done right</h2>
             </div>
-            <div className="service-grid">
+            <div className="service-grid service-grid--four">
               {services.map((service) => (
                 <article className="card card--interactive" key={service.title}>
                   <span className="card__icon">
@@ -303,74 +359,38 @@ export default function Home() {
           </section>
 
           <section className="section reveal reveal--delay-2" id="pricing">
-            <div className="pricing">
-              <div>
-                <p className="eyebrow">Fair Pricing</p>
-                <h2>Straightforward pricing, no surprises</h2>
-                <p className="hero__lead">
-                  Our signature cut is designed for homeowners who want
-                  dependable service without overpaying. Ideal for small to
-                  medium sized properties in Lorain County.
-                </p>
-                <p className="section__linkline">
-                  Larger lot or need extra detail work? <Link href="/#contact">Reach out for a custom quote.</Link>
-                </p>
-              </div>
-              <div className="pricing-card">
-                <span className="pricing-card__badge">Most Popular</span>
-                <div className="pricing-card__price">
-                  <strong>$40</strong>
-                  <span>front + backyard cut</span>
-                </div>
-                <p className="pricing-card__desc">Everything you need for a consistently sharp lawn.</p>
-                <ul className="checklist">
-                  {pricingInclusions.map((item) => (
-                    <li key={item}>
-                      <IconCheck />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <TrackedLink
-                  className="btn btn--primary btn--block"
-                  href="tel:+12168897822"
-                  trackingEvent="conversion_call_click"
-                  trackingLabel="Pricing Call"
-                >
-                  <IconPhone />
-                  Book This Cut
-                </TrackedLink>
-              </div>
+            <div className="section__heading">
+              <p className="eyebrow">Fair Pricing</p>
+              <h2>Straightforward pricing, no surprises</h2>
+              <p>
+                Flat prices for the front and back yard of small to medium
+                lawns in Lorain County. Larger lot or need extra detail work?{" "}
+                <Link className="inline-link" href="/#contact">
+                  Reach out for a custom quote.
+                </Link>
+              </p>
+            </div>
+            <div className="pricing-grid pricing-grid--three">
+              {pricingOrder.map((service) => (
+                <ServicePricingCard
+                  key={service.slug}
+                  service={service}
+                  trackingLabel={`Pricing ${service.shortName} Call`}
+                />
+              ))}
             </div>
           </section>
 
           <section className="section section--highlight reveal reveal--delay-2" id="results">
             <div className="section__heading section__heading--center">
-              <p className="eyebrow">Real Results</p>
+              <p className="eyebrow">Before &amp; After</p>
               <h2>See the Latten Lawncare difference</h2>
+              <p>Drag the slider on each photo to compare the yard before and after.</p>
             </div>
-            <div className="compare">
-              <figure className="compare-panel">
-                <span className="compare-panel__tag">Before</span>
-                <Image
-                  src="/lawn-before.svg"
-                  alt="An overgrown, patchy lawn before service"
-                  width={1200}
-                  height={800}
-                  loading="eager"
-                />
-              </figure>
-              <figure className="compare-panel compare-panel--after">
-                <span className="compare-panel__tag">After</span>
-                <Image
-                  src="/lawn-after.svg"
-                  alt="A freshly mowed and edged lawn after service"
-                  width={1200}
-                  height={800}
-                  loading="eager"
-                />
-              </figure>
-            </div>
+            <BeforeAfterGallery projects={galleryProjects.slice(0, 2)} />
+            <p className="section__linkline section__linkline--center">
+              <Link href="/before-and-after">View all before and after photos</Link>
+            </p>
           </section>
 
           <section className="section reveal reveal--delay-3" id="area">

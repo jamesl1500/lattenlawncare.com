@@ -3,23 +3,23 @@ import Link from "next/link";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import MobileCallBar from "@/components/MobileCallBar";
+import JsonLd from "@/components/JsonLd";
 import { IconCheck, IconLeaf, IconMower, IconPhone } from "@/components/icons";
-import { breadcrumbJsonLd, business, businessId } from "@/lib/business";
+import { breadcrumbJsonLd, business, businessId, pageMetadata } from "@/lib/business";
 import { services } from "@/lib/services";
 import { siteBaseUrl } from "@/lib/locations";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Lawn Care Services & Pricing | Latten Lawncare",
   description:
-    "Fall leaf cleanup (we blow, rake, and bag) and lawn mowing with edging, each $40 for small to medium lawns in Lorain County, OH. Call or text (216) 889-7822 for a free quote.",
-  alternates: {
-    canonical: "/services",
-  },
-};
+    "Fall leaf cleanup (we blow, rake, and bag) and lawn mowing with edging, $40 each, or both in one visit with Leaf & Mow for $70. Small to medium lawns in Lorain County, OH. Call (216) 889-7822.",
+  path: "/services",
+});
 
 const serviceIcons: Record<string, typeof IconMower> = {
   "lawn-mowing": IconMower,
   "leaf-cleanup": IconLeaf,
+  "leaf-and-mow": IconLeaf,
 };
 
 export default function ServicesPage() {
@@ -51,14 +51,15 @@ export default function ServicesPage() {
   return (
     <div className="site-shell">
       <SiteHeader />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <main id="main-content">
         <section className="section reveal">
           <p className="eyebrow">Services</p>
           <h1>Lawn care services in Lorain County</h1>
           <p className="hero__lead">
-            Two simple services, one flat price. Each is $40 for the front and back yard of a small to
-            medium lawn. Bigger yard? Call for a free quote.
+            Simple services with flat prices for the front and back yard of a small to medium lawn:
+            leaf cleanup or mowing for $40 each, or both in one visit with Leaf &amp; Mow for $70.
+            Bigger yard? Call for a free quote.
           </p>
         </section>
 

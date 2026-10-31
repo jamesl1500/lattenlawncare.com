@@ -15,6 +15,22 @@ describe("SiteHeader", () => {
       "/locations",
     );
     expect(within(primaryNav).getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
+    expect(within(primaryNav).getByRole("link", { name: "Before & After" })).toHaveAttribute(
+      "href",
+      "/before-and-after",
+    );
+  });
+
+  it("promotes fall leaf cleanup and the $70 Leaf & Mow", () => {
+    render(<SiteHeader />);
+
+    const promo = screen.getByRole("region", { name: "Seasonal offer" });
+    expect(promo).toHaveTextContent("Leaf cleanup $40");
+    expect(promo).toHaveTextContent("Leaf & Mow $70");
+    expect(within(promo).getByRole("link", { name: "See details" })).toHaveAttribute(
+      "href",
+      "/services/leaf-and-mow",
+    );
   });
 
   it("opens and closes the mobile navigation panel", async () => {

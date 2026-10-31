@@ -36,8 +36,4 @@
   </g>
   <path d="M0 430c120-30 220 20 340-5s220-45 340-15 240 35 340 5 180-30 180-30v20c0 0-90 25-180 30s-240-35-340-5-220 45-340 15-220-25-340 5Z" fill="#c9b96a" opacity="0.55"/>
   <rect x="0" y="0" width="1200" height="800" fill="none"/>
-  <g transform="translate(64 64)">
-    <rect width="150" height="44" rx="22" fill="#2c2416" opacity="0.78"/>
-    <text x="75" y="29" text-anchor="middle" fill="#fdf6e3" font-family="Arial, sans-serif" font-size="20" font-weight="700">BEFORE</text>
-  </g>
 </svg>
