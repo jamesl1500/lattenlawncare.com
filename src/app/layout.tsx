@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Outfit, Space_Grotesk } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
+
+const GA_MEASUREMENT_ID = "G-9P7K9YV3GZ";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -59,6 +62,19 @@ export default function RootLayout({
           Skip to main content
         </a>
         {children}
+        {/* Google tag (gtag.js). TrackedLink sends its events through window.gtag. */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
       </body>
     </html>
   );
